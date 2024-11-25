@@ -55,6 +55,10 @@ def train(arguments):
     # Setup the NN Model
     model = get_model(json_opts.model)
 
+    #gpu support
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
     # Get input and target transforms
     input_transform, target_transform = get_cityscapes_transforms()
 
