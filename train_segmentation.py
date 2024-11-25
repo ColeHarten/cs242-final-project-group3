@@ -16,6 +16,8 @@ from models import get_model
 from torchvision.datasets import Cityscapes
 from torchvision.transforms import Compose, ToTensor, Normalize, Resize
 
+device = torch.device("cuda")
+
 def get_cityscapes_transforms():
     # For the input image
     input_transform = Compose([
@@ -158,6 +160,6 @@ if __name__ == '__main__':
         debug = True
 
     # Create an instance of the Args class
-    args = Args()
+    args = Args().to(device)
 
     train(args)
