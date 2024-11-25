@@ -158,3 +158,9 @@ class FeedForwardSegmentation(BaseModel):
 
     def save(self, epoch_label):
         self.save_network(self.net, 'S', epoch_label, self.gpu_ids)
+
+    def to(self, device):
+        # Manually move all components to the specified device
+        self.some_layer = self.some_layer.to(device)
+        return self
+
