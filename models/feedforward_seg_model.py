@@ -64,6 +64,16 @@ class FeedForwardSegmentation(BaseModel):
             self.schedulers.append(get_scheduler(optimizer, train_opt))
             print('Scheduler is added for optimiser {0}'.format(optimizer))
 
+    def to(self, device):
+        """
+        Move all components of the model to the specified device.
+        """
+        self.device = device
+        self.net = self.net.to(device)
+        if hasattr(self, 'criterion'):
+            self.criterion = self.criterion.to(device)
+        return self
+
     def set_input(self, *inputs):
         # self.input.resize_(inputs[0].size()).copy_(inputs[0])
         for idx, _input in enumerate(inputs):
@@ -158,9 +168,3 @@ class FeedForwardSegmentation(BaseModel):
 
     def save(self, epoch_label):
         self.save_network(self.net, 'S', epoch_label, self.gpu_ids)
-
-    def to(self, device):
-        # Manually move all components to the specified device
-        self.some_layer = self.some_layer.to(device)
-        return self
-
