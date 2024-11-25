@@ -77,9 +77,9 @@ def train(arguments):
                                           target_transform=target_transform)
 
     # DataLoaders
-    train_loader = DataLoader(dataset=train_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=True)
-    valid_loader = DataLoader(dataset=valid_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
-    test_loader = DataLoader(dataset=test_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
+    train_loader = DataLoader(dataset=train_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=True, pin_memory=True)
+    valid_loader = DataLoader(dataset=valid_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False, pin_memory=True)
+    test_loader = DataLoader(dataset=test_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False, pin_memory=True)
 
     # Print the first input-target pair
     # input_img, target_mask = train_dataset[0]
@@ -161,6 +161,6 @@ if __name__ == '__main__':
         debug = True
 
     # Create an instance of the Args class
-    args = Args().to(device)
+    args = Args()
 
     train(args)
