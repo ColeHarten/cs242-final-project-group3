@@ -57,7 +57,7 @@ def train(arguments):
     model = get_model(json_opts.model)
 
     #gpu support
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda")
 
     # Get input and target transforms
     input_transform, target_transform = get_cityscapes_transforms()
@@ -99,6 +99,9 @@ def train(arguments):
 
         # Training Iterations
         for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader)):
+            images = images.to(device)  # Move images to GPU
+            labels = labels.to(device)  # Move labels to GPU
+
             # Make a training update
             model.set_input(images, labels)
             model.optimize_parameters()
@@ -111,6 +114,8 @@ def train(arguments):
         # Validation and Testing Iterations
         for loader, split in zip([valid_loader, test_loader], ['validation', 'test']):
             for epoch_iter, (images, labels) in tqdm(enumerate(loader, 1), total=len(loader)):
+                images = images.to(device)  # Move images to GPU
+                labels = labels.to(device)  # Move labels to GPU
 
                 # Make a forward pass with the model
                 model.set_input(images, labels)
