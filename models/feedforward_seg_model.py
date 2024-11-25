@@ -19,8 +19,8 @@ class FeedForwardSegmentation(BaseModel):
 
     def initialize(self, opts, **kwargs):
         BaseModel.initialize(self, opts, **kwargs)
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.net = self.net.to(self.device)  # Move the model to GPU
+        # self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # self.net = self.net.to(self.device)  # Move the model to GPU
         self.isTrain = opts.isTrain
 
         # define network input and output pars
