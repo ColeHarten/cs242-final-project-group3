@@ -55,8 +55,10 @@ class unet_2D(nn.Module):
 
     def forward(self, inputs):
             #gpu support
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        inputs = inputs.to(device)
+        # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # inputs = inputs.to(device)
+
+        inputs = inputs.cuda()
 
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
