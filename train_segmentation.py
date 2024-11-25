@@ -55,11 +55,12 @@ def train(arguments):
     json_opts = json_file_to_pyobj(json_filename)
     train_opts = json_opts.training
 
-    # Setup the NN Model
-    model = get_model(json_opts.model)
-
     #gpu support
     device = torch.device("cuda")
+
+    # Setup the NN Model
+    model = get_model(json_opts.model)
+    model = model.to(device)
 
     # Get input and target transforms
     input_transform, target_transform = get_cityscapes_transforms()
