@@ -10,4 +10,5 @@ scikit-image
 h5py
 pandas
 dominate
+opencv-python
 torchsample==0.1.0
