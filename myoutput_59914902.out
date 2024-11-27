@@ -1,0 +1,129 @@
+
+Initialising model unet_grid_gating
+Model [FeedForwardSegmentation] is created
+opt.lr_policy = [step]
+Scheduler is added for optimiser SGD (
+Parameter Group 0
+    dampening: 0
+    differentiable: False
+    foreach: None
+    fused: None
+    initial_lr: 0.0001
+    lr: 0.0001
+    maximize: False
+    momentum: 0.9
+    nesterov: True
+    weight_decay: 1e-05
+)
+(epoch: 0, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+Saving the model S at the end of epoch 0
+current learning rate = 0.0001000
+(epoch: 1, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 2, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 3, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 4, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 5, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+Saving the model S at the end of epoch 5
+current learning rate = 0.0001000
+(epoch: 6, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 7, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 8, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000
+(epoch: 9, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+current learning rate = 0.0001000

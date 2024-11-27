@@ -1,0 +1,92 @@
+
+Initialising model unet_grid_gating
+Model [FeedForwardSegmentation] is created
+Validation dataset size: 0
+Validation loader size: 0
+opt.lr_policy = [step]
+Scheduler is added for optimiser SGD (
+Parameter Group 0
+    dampening: 0
+    differentiable: False
+    foreach: None
+    fused: None
+    initial_lr: 0.0001
+    lr: 0.0001
+    maximize: False
+    momentum: 0.9
+    nesterov: True
+    weight_decay: 1e-05
+)
+(epoch: 0, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+----------------------------------------
+Epoch 0 train errors: {'Seg_Loss': 0.9987448427988135}
+Epoch 0 validation errors: {}
+Epoch 0 test errors: {'Seg_Loss': 0.9986885367887807, 'Overall_Acc': 0.0, 'Mean_IOU': 0.0, 'Class_0': 0.0, 'Class_1': 0.0, 'Class_2': 0.0, 'Class_3': 0.0, 'Class_4': 0.0, 'Class_5': 0.0, 'Class_6': 0.0, 'Class_7': 0.0, 'Class_8': 0.0, 'Class_9': 0.0, 'Class_10': 0.0, 'Class_11': 0.0, 'Class_12': 0.0, 'Class_13': 0.0, 'Class_14': 0.0, 'Class_15': 0.0, 'Class_16': 0.0, 'Class_17': 0.0, 'Class_18': 0.0, 'Class_19': 0.0, 'Class_20': 0.0, 'Class_21': 0.0, 'Class_22': 0.0, 'Class_23': 0.0, 'Class_24': 0.0, 'Class_25': 0.0, 'Class_26': 0.0, 'Class_27': 0.0, 'Class_28': 0.0, 'Class_29': 0.0}
+----------------------------------------
+Saving the model S at the end of epoch 0
+current learning rate = 0.0001000
+(epoch: 1, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+----------------------------------------
+Epoch 1 train errors: {'Seg_Loss': 0.9987204761608787}
+Epoch 1 validation errors: {}
+Epoch 1 test errors: {'Seg_Loss': 0.9986766286545399, 'Overall_Acc': 0.0, 'Mean_IOU': 0.0, 'Class_0': 0.0, 'Class_1': 0.0, 'Class_2': 0.0, 'Class_3': 0.0, 'Class_4': 0.0, 'Class_5': 0.0, 'Class_6': 0.0, 'Class_7': 0.0, 'Class_8': 0.0, 'Class_9': 0.0, 'Class_10': 0.0, 'Class_11': 0.0, 'Class_12': 0.0, 'Class_13': 0.0, 'Class_14': 0.0, 'Class_15': 0.0, 'Class_16': 0.0, 'Class_17': 0.0, 'Class_18': 0.0, 'Class_19': 0.0, 'Class_20': 0.0, 'Class_21': 0.0, 'Class_22': 0.0, 'Class_23': 0.0, 'Class_24': 0.0, 'Class_25': 0.0, 'Class_26': 0.0, 'Class_27': 0.0, 'Class_28': 0.0, 'Class_29': 0.0}
+----------------------------------------
+current learning rate = 0.0001000
+(epoch: 2, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+----------------------------------------
+Epoch 2 train errors: {'Seg_Loss': 0.9986964747402238}
+Epoch 2 validation errors: {}
+Epoch 2 test errors: {'Seg_Loss': 0.9986547319052731, 'Overall_Acc': 0.0, 'Mean_IOU': 0.0, 'Class_0': 0.0, 'Class_1': 0.0, 'Class_2': 0.0, 'Class_3': 0.0, 'Class_4': 0.0, 'Class_5': 0.0, 'Class_6': 0.0, 'Class_7': 0.0, 'Class_8': 0.0, 'Class_9': 0.0, 'Class_10': 0.0, 'Class_11': 0.0, 'Class_12': 0.0, 'Class_13': 0.0, 'Class_14': 0.0, 'Class_15': 0.0, 'Class_16': 0.0, 'Class_17': 0.0, 'Class_18': 0.0, 'Class_19': 0.0, 'Class_20': 0.0, 'Class_21': 0.0, 'Class_22': 0.0, 'Class_23': 0.0, 'Class_24': 0.0, 'Class_25': 0.0, 'Class_26': 0.0, 'Class_27': 0.0, 'Class_28': 0.0, 'Class_29': 0.0}
+----------------------------------------
+current learning rate = 0.0001000
+(epoch: 3, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191
+test iteration: 100/191
+test iteration: 150/191
+----------------------------------------
+Epoch 3 train errors: {'Seg_Loss': 0.9986744747028587}
+Epoch 3 validation errors: {}
+Epoch 3 test errors: {'Seg_Loss': 0.9986319704205578, 'Overall_Acc': 1.2482648120500655e-09, 'Mean_IOU': 4.9930592482002616e-11, 'Class_0': 0.0, 'Class_1': 0.0, 'Class_2': 0.0, 'Class_3': 0.0, 'Class_4': 0.0, 'Class_5': 0.0, 'Class_6': 0.0, 'Class_7': 0.0, 'Class_8': 0.0, 'Class_9': 0.0, 'Class_10': 0.0, 'Class_11': 0.0, 'Class_12': 0.0, 'Class_13': 0.0, 'Class_14': 0.0, 'Class_15': 0.0, 'Class_16': 0.0, 'Class_17': 0.0, 'Class_18': 0.0, 'Class_19': 0.0, 'Class_20': 0.0, 'Class_21': 0.0, 'Class_22': 0.0, 'Class_23': 0.0, 'Class_24': 0.0, 'Class_25': 0.0, 'Class_26': 0.0, 'Class_27': 0.0, 'Class_28': 0.0, 'Class_29': 0.0}
+----------------------------------------
+current learning rate = 0.0001000
+(epoch: 4, total # iters: 322)
+train iteration: 50/322
+train iteration: 100/322
+train iteration: 150/322
+train iteration: 200/322
+train iteration: 250/322
+train iteration: 300/322
+test iteration: 50/191

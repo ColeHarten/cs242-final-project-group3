@@ -75,7 +75,11 @@ def train(arguments):
     train_loader = DataLoader(dataset=train_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
     test_loader = DataLoader(dataset=test_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
+    
+    print(f"Validation dataset size: {len(valid_dataset)}")
+    print(f"Validation loader size: {len(valid_loader)}")
 
+    
     # Print the first input-target pair
     # input_img, target_mask = train_dataset[0]
 
@@ -96,7 +100,6 @@ def train(arguments):
         print('(epoch: %d, total # iters: %d)' % (epoch, len(train_loader)))
 
         # Training Iterations
-        #for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader), file=sys.stdout):
         for epoch_iter, (images, labels) in enumerate(train_loader, 1):
             # Make a training update
             model.set_input(images, labels)
@@ -130,7 +133,13 @@ def train(arguments):
                     print(f"{split} iteration: {epoch_iter}/{len(loader)}")
                 
                 # visualizer.display_current_results(visuals, epoch=epoch, save_result=False)
-
+        
+        print("----------------------------------------")
+        for split in ['train', 'validation', 'test']:
+            epoch_errors = error_logger.get_errors(split)
+            print(f"Epoch {epoch} {split} errors: {epoch_errors}")
+        print("----------------------------------------")
+        
         # Update the plots
         # for split in ['train', 'validation', 'test']:
         #     visualizer.plot_current_errors(epoch, error_logger.get_errors(split), split_name=split)

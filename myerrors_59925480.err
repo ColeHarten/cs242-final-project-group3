@@ -1,0 +1,6 @@
+/n/home01/charten/.local/lib/python3.10/site-packages/torch/nn/functional.py:3809: UserWarning: nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.
+  warnings.warn("nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.")
+/n/home01/charten/cs242-final-project-group3/utils/metrics.py:26: RuntimeWarning: invalid value encountered in divide
+  acc_cls = np.diag(hist) / hist.sum(axis=1)
+/n/home01/charten/cs242-final-project-group3/utils/metrics.py:28: RuntimeWarning: invalid value encountered in divide
+  iu = np.diag(hist) / (hist.sum(axis=1) + hist.sum(axis=0) - np.diag(hist))
