@@ -114,3 +114,6 @@ flycheck*
 
 # Data files
 /data
+/pancreas_CT
+*.err
+*.out
