@@ -261,13 +261,7 @@ class unetUp(nn.Module):
         # Concatenate along the channel dimension and apply convolution
         concatenated = torch.cat([inputs1, outputs2], dim=1)
         
-        print(f"Concatenated shape: {concatenated.shape}")
-        
-        ret = self.conv(concatenated)
-        
-        print(f"Ret shape: {ret.shape}")
-        
-        return ret
+        return self.conv(concatenated)
 
 
 class UnetUp3(nn.Module):

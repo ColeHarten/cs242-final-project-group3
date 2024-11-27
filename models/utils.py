@@ -75,13 +75,25 @@ def adjust_learning_rate(optimizer, init_lr, epoch):
 
 def segmentation_stats(pred_seg, target):
     n_classes = pred_seg.size(1)
-    pred_lbls = pred_seg.data.max(1)[1].cuda().numpy()
-    gt = np.squeeze(target.data.cuda().numpy(), axis=1)
+    
+    # Move pred_seg and target to CPU and convert to NumPy arrays
+    pred_lbls = pred_seg.data.max(1)[1].cpu().numpy()  # Fix: Move to CPU before calling numpy()
+    
+    # Check if target has more than one channel dimension
+    target_np = target.data.cpu().numpy()
+    
+    gt = target_np[ :, 0, :, :]
+    
+#     if target_np.shape[1] == 1:  # If only one channel, squeeze it
+#         gt = np.squeeze(target_np, axis=1)
+#     else:
+#         gt = target_np  # If not, leave it as is
+        
     gts, preds = [], []
     for gt_, pred_ in zip(gt, pred_lbls):
         gts.append(gt_)
         preds.append(pred_)
-
+        
     iou = segmentation_scores(gts, preds, n_class=n_classes)
     dice = dice_score_list(gts, preds, n_class=n_classes)
 

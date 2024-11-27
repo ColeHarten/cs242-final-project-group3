@@ -96,7 +96,8 @@ def train(arguments):
         print('(epoch: %d, total # iters: %d)' % (epoch, len(train_loader)))
 
         # Training Iterations
-        for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader), file=sys.stdout):
+        #for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader), file=sys.stdout):
+        for epoch_iter, (images, labels) in enumerate(train_loader, 1):
             # Make a training update
             model.set_input(images, labels)
             model.optimize_parameters()
@@ -105,10 +106,13 @@ def train(arguments):
             # Error visualisation
             errors = model.get_current_errors()
             error_logger.update(errors, split='train')
+            
+            if epoch_iter % 50 == 0:
+                print(f"train iteration: {epoch_iter}/{len(train_loader)}")
 
         # Validation and Testing Iterations
         for loader, split in zip([valid_loader, test_loader], ['validation', 'test']):
-            for epoch_iter, (images, labels) in tqdm(enumerate(loader, 1), total=len(loader)):
+            for epoch_iter, (images, labels) in enumerate(loader, 1):
 
                 # Make a forward pass with the model
                 model.set_input(images, labels)
@@ -121,6 +125,10 @@ def train(arguments):
 
                 # Visualise predictions
                 visuals = model.get_current_visuals()
+                
+                if epoch_iter % 50 == 0:
+                    print(f"{split} iteration: {epoch_iter}/{len(loader)}")
+                
                 # visualizer.display_current_results(visuals, epoch=epoch, save_result=False)
 
         # Update the plots

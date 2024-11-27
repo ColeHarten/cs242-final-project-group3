@@ -3,7 +3,7 @@
     "arch_type": "cityscapes",
     "n_epochs": 10,
     "save_epoch_freq": 5,
-    "lr_policy": "poly",
+    "lr_policy": "step",
     "lr_decay_iters": 100,
     "batchSize": 8,
     "preloadData": false
