@@ -57,7 +57,6 @@ class deconv2DBatchNormRelu(nn.Module):
         outputs = self.dcbr_unit(inputs)
         return outputs
 
-
 class unetConv2(nn.Module):
     def __init__(self, in_size, out_size, is_batchnorm, n=2, ks=3, stride=1, padding=1):
         super(unetConv2, self).__init__()
@@ -66,19 +65,20 @@ class unetConv2(nn.Module):
         self.stride = stride
         self.padding = padding
         
-        # List of convolutional layers
         layers = []
+        
+        # Define convolutional layers with or without BatchNorm
         for i in range(n):
-            conv_layer = nn.Conv2d(in_size, out_size, ks, stride, padding)
+            layers.append(nn.Conv2d(in_size, out_size, ks, stride, padding))
             if is_batchnorm:
-                layers.append(conv_layer)
                 layers.append(nn.BatchNorm2d(out_size))
             layers.append(nn.ReLU(inplace=True))
-            in_size = out_size  # Update input size for next layer
-        
+            in_size = out_size  # Update in_size for the next layer
+
+        # Combine layers into a single Sequential block
         self.conv_layers = nn.Sequential(*layers)
 
-        # Initialise the blocks
+        # Initialize weights
         for m in self.modules():
             if isinstance(m, nn.Conv2d) or isinstance(m, nn.BatchNorm2d):
                 init_weights(m, init_type='kaiming')
@@ -230,18 +230,15 @@ class UnetGridGatingSignal3(nn.Module):
 class unetUp(nn.Module):
     def __init__(self, in_size, out_size, is_deconv):
         super(unetUp, self).__init__()
-
-        # Define the upsampling layer
+        self.conv = unetConv2(in_size+out_size, out_size, False)
         if is_deconv:
-            self.up = nn.ConvTranspose2d(in_size, in_size, kernel_size=4, stride=2, padding=1)
+            self.up = nn.ConvTranspose2d(in_size, out_size, kernel_size=4, stride=2, padding=1)
         else:
             self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
-        # Define the convolution layer to process concatenated inputs
-        self.conv = unetConv2(in_size * 2, out_size, False)
-
-        # Initialize weights for layers
+        # initialise the blocks
         for m in self.children():
+            if m.__class__.__name__.find('unetConv2') != -1: continue
             init_weights(m, init_type='kaiming')
 
     def forward(self, inputs1, inputs2):
@@ -250,6 +247,7 @@ class unetUp(nn.Module):
         - `inputs1`: skip connection (from encoder).
         - `inputs2`: upsampled feature map (from decoder).
         """
+
         # Upsample inputs2
         outputs2 = self.up(inputs2)
 
@@ -261,7 +259,15 @@ class unetUp(nn.Module):
         outputs2 = F.pad(outputs2, [diff_w // 2, diff_w - diff_w // 2, diff_h // 2, diff_h - diff_h // 2])
 
         # Concatenate along the channel dimension and apply convolution
-        return self.conv(torch.cat([inputs1, outputs2], dim=1))
+        concatenated = torch.cat([inputs1, outputs2], dim=1)
+        
+        print(f"Concatenated shape: {concatenated.shape}")
+        
+        ret = self.conv(concatenated)
+        
+        print(f"Ret shape: {ret.shape}")
+        
+        return ret
 
 
 class UnetUp3(nn.Module):
@@ -408,8 +414,6 @@ class residualBottleneck(nn.Module):
         out = self.relu(out)
 
         return out
-
-
 
 
 class SeqModelFeatureExtractor(nn.Module):
