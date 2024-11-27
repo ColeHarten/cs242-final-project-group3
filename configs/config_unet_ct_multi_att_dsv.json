@@ -45,7 +45,8 @@
     "isTrain": true,
     "checkpoints_dir": "./checkpoints",
     "experiment_name": "experiment_unet_ct_multi_att_dsv",
-    "criterion": "dice_loss"
+    "criterion": "dice_loss",
+    "attention_dsample": (2,2) 
   }
 }
 

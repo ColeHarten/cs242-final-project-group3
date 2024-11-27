@@ -1,7 +1,7 @@
 {
   "training": {
     "arch_type": "cityscapes",
-    "n_epochs": 300,
+    "n_epochs": 10,
     "save_epoch_freq": 5,
     "lr_policy": "poly",
     "lr_decay_iters": 100,
@@ -33,7 +33,7 @@
     "type": "seg",
     "continue_train": false,
     "which_epoch": "latest",
-    "model_type": "unet",
+    "model_type": "unet_grid_gating",
     "tensor_dim": "2D",
     "division_factor": 16,
     "input_nc": 3,

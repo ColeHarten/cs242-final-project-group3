@@ -6,16 +6,17 @@ from models.networks_other import init_weights
 
 class _GridAttentionBlockND(nn.Module):
     def __init__(self, in_channels, gating_channels, inter_channels=None, dimension=3, mode='concatenation',
-                 sub_sample_factor=(2,2,2)):
+                 sub_sample_factor=(2,2)):
         super(_GridAttentionBlockND, self).__init__()
-
+        
+        
+        
         assert dimension in [2, 3]
         assert mode in ['concatenation', 'concatenation_debug', 'concatenation_residual']
 
         # Downsampling rate for the input featuremap
         if isinstance(sub_sample_factor, tuple): self.sub_sample_factor = sub_sample_factor
         elif isinstance(sub_sample_factor, list): self.sub_sample_factor = tuple(sub_sample_factor)
-        else: self.sub_sample_factor = tuple([sub_sample_factor]) * dimension
 
         # Default parameter set
         self.mode = mode
@@ -45,16 +46,16 @@ class _GridAttentionBlockND(nn.Module):
 
         # Output transform
         self.W = nn.Sequential(
-            conv_nd(in_channels=self.in_channels, out_channels=self.in_channels, kernel_size=1, stride=1, padding=0),
+            conv_nd(in_channels=self.in_channels, out_channels=self.in_channels, kernel_size=1, stride=1),
             bn(self.in_channels),
         )
 
         # Theta^T * x_ij + Phi^T * gating_signal + bias
         self.theta = conv_nd(in_channels=self.in_channels, out_channels=self.inter_channels,
-                             kernel_size=self.sub_sample_kernel_size, stride=self.sub_sample_factor, padding=0, bias=False)
+                             kernel_size=self.sub_sample_kernel_size, stride=self.sub_sample_factor, bias=False)
         self.phi = conv_nd(in_channels=self.gating_channels, out_channels=self.inter_channels,
-                           kernel_size=1, stride=1, padding=0, bias=True)
-        self.psi = conv_nd(in_channels=self.inter_channels, out_channels=1, kernel_size=1, stride=1, padding=0, bias=True)
+                             kernel_size=1, stride=1, bias=True)
+        self.psi = conv_nd(in_channels=self.inter_channels, out_channels=1, kernel_size=1, stride=1, bias=True)
 
         # Initialise weights
         for m in self.children():
@@ -86,25 +87,23 @@ class _GridAttentionBlockND(nn.Module):
         batch_size = input_size[0]
         assert batch_size == g.size(0)
 
-        # theta => (b, c, t, h, w) -> (b, i_c, t, h, w) -> (b, i_c, thw)
-        # phi   => (b, g_d) -> (b, i_c)
-        theta_x = self.theta(x)
-        theta_x_size = theta_x.size()
+        # Ensure kernel size and stride are valid for Conv2d
+        theta_x = self.theta(x)  # Adjusted padding inside Conv2d definition
 
-        # g (b, c, t', h', w') -> phi_g (b, i_c, t', h', w')
-        #  Relu(theta_x + phi_g + bias) -> f = (b, i_c, thw) -> (b, i_c, t/s1, h/s2, w/s3)
-        phi_g = F.upsample(self.phi(g), size=theta_x_size[2:], mode=self.upsample_mode)
+        # Resize gating signal to match theta_x
+        phi_g = F.upsample(self.phi(g), size=theta_x.size()[2:], mode=self.upsample_mode)
+
+        # Apply the attention mechanism
         f = F.relu(theta_x + phi_g, inplace=True)
-
-        #  psi^T * f -> (b, psi_i_c, t/s1, h/s2, w/s3)
         sigm_psi_f = F.sigmoid(self.psi(f))
 
-        # upsample the attentions and multiply
+        # Upsample the attentions and multiply
         sigm_psi_f = F.upsample(sigm_psi_f, size=input_size[2:], mode=self.upsample_mode)
         y = sigm_psi_f.expand_as(x) * x
         W_y = self.W(y)
 
         return W_y, sigm_psi_f
+
 
     def _concatenation_debug(self, x, g):
         input_size = x.size()
@@ -161,13 +160,13 @@ class _GridAttentionBlockND(nn.Module):
 
 class GridAttentionBlock2D(_GridAttentionBlockND):
     def __init__(self, in_channels, gating_channels, inter_channels=None, mode='concatenation',
-                 sub_sample_factor=(2,2,2)):
+                 sub_sample_factor=(2, 2)):
         super(GridAttentionBlock2D, self).__init__(in_channels,
                                                    inter_channels=inter_channels,
                                                    gating_channels=gating_channels,
                                                    dimension=2, mode=mode,
-                                                   sub_sample_factor=sub_sample_factor,
-                                                   )
+                                                   sub_sample_factor=sub_sample_factor)
+
 
 
 class GridAttentionBlock3D(_GridAttentionBlockND):

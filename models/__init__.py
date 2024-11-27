@@ -23,7 +23,7 @@ class ModelOpts:
 
         # Attention
         self.nonlocal_mode = 'concatenation'
-        self.attention_dsample = (2,2,2)
+        self.attention_dsample = (2,2)
 
         # Attention Classifier
         self.aggregation_mode = 'concatenation'

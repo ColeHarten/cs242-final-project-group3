@@ -19,7 +19,7 @@ class FeedForwardSegmentation(BaseModel):
 
     def initialize(self, opts, **kwargs):
         BaseModel.initialize(self, opts, **kwargs)
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda")
         # self.net = self.net.to(self.device)  # Move the model to GPU
         self.isTrain = opts.isTrain
 
@@ -33,7 +33,8 @@ class FeedForwardSegmentation(BaseModel):
                                in_channels=opts.input_nc, nonlocal_mode=opts.nonlocal_mode,
                                tensor_dim=opts.tensor_dim, feature_scale=opts.feature_scale,
                                attention_dsample=opts.attention_dsample)
-        # if self.use_cuda: self.net = self.net.cpu()
+
+        self.net = self.net.to(self.device)
 
         # load the model if a path is specified or it is in inference mode
         if not self.isTrain or opts.continue_train:
@@ -92,16 +93,14 @@ class FeedForwardSegmentation(BaseModel):
 
     def forward(self, split):
         if split == 'train':
-            # print(f"Input to net shape: {self.input.size()}")
-            self.prediction = self.net(Variable(self.input.to(self.device)))
-            # print(f"Output shape: {self.prediction.size()}")
+            self.prediction = self.net(self.input) 
         elif split == 'test':
-            with torch.no_grad():  # `volatile` is deprecated, replaced with no_grad
-                self.prediction = self.net(Variable(self.input.to(self.device)))
+            with torch.no_grad():
+                self.prediction = self.net(self.input)
             # Apply a softmax and return a segmentation map
             self.logits = self.net.apply_argmax_softmax(self.prediction)
             self.pred_seg = self.logits.data.max(1)[1].unsqueeze(1)
-            
+
     def backward(self):
         self.loss_S = self.criterion(self.prediction, self.target)
         self.loss_S.backward()

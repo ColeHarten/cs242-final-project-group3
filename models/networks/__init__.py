@@ -3,6 +3,7 @@ from .unet_3D import *
 from .unet_nonlocal_2D import *
 from .unet_nonlocal_3D import *
 from .unet_grid_attention_3D import *
+from .unet_grid_attention_2D import *
 from .unet_CT_dsv_3D import *
 from .unet_CT_single_att_dsv_3D import *
 from .unet_CT_multi_att_dsv_3D import *
@@ -59,7 +60,7 @@ def _get_model_instance(name, tensor_dim):
     return {
         'unet':{'2D': unet_2D, '3D': unet_3D},
         'unet_nonlocal':{'2D': unet_nonlocal_2D, '3D': unet_nonlocal_3D},
-        'unet_grid_gating': {'3D': unet_grid_attention_3D},
+        'unet_grid_gating': {'2D': unet_grid_attention_2D,'3D': unet_grid_attention_3D},
         'unet_ct_dsv': {'3D': unet_CT_dsv_3D},
         'unet_ct_single_att_dsv': {'3D': unet_CT_single_att_dsv_3D},
         'unet_ct_multi_att_dsv': {'3D': unet_CT_multi_att_dsv_3D},
