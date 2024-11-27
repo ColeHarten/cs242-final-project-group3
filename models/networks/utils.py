@@ -87,6 +87,8 @@ class unetConv2(nn.Module):
             init_weights(m, init_type='kaiming')
 
     def forward(self, inputs):
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        inputs = inputs.to(device)
         x = inputs
         for i in range(1, self.n+1):
             conv = getattr(self, 'conv%d'%i)

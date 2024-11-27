@@ -75,8 +75,8 @@ def adjust_learning_rate(optimizer, init_lr, epoch):
 
 def segmentation_stats(pred_seg, target):
     n_classes = pred_seg.size(1)
-    pred_lbls = pred_seg.data.max(1)[1].cpu().numpy()
-    gt = np.squeeze(target.data.cpu().numpy(), axis=1)
+    pred_lbls = pred_seg.data.max(1)[1].cuda().numpy()
+    gt = np.squeeze(target.data.cuda().numpy(), axis=1)
     gts, preds = [], []
     for gt_, pred_ in zip(gt, pred_lbls):
         gts.append(gt_)

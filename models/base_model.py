@@ -63,7 +63,7 @@ class BaseModel():
         print('Saving the model {0} at the end of epoch {1}'.format(network_label, epoch_label))
         save_filename = '{0:03d}_net_{1}.pth'.format(epoch_label, network_label)
         save_path = os.path.join(self.save_dir, save_filename)
-        torch.save(network.cpu().state_dict(), save_path)
+        torch.save(network.cuda().state_dict(), save_path)
         if len(gpu_ids) and torch.cuda.is_available():
             network.cuda(gpu_ids[0])
 

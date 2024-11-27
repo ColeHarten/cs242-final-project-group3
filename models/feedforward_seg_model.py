@@ -19,6 +19,8 @@ class FeedForwardSegmentation(BaseModel):
 
     def initialize(self, opts, **kwargs):
         BaseModel.initialize(self, opts, **kwargs)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        # self.net = self.net.to(self.device)  # Move the model to GPU
         self.isTrain = opts.isTrain
 
         # define network input and output pars
@@ -62,6 +64,16 @@ class FeedForwardSegmentation(BaseModel):
             self.schedulers.append(get_scheduler(optimizer, train_opt))
             print('Scheduler is added for optimiser {0}'.format(optimizer))
 
+    def to(self, device):
+        """
+        Move all components of the model to the specified device.
+        """
+        self.device = device
+        self.net = self.net.to(device)
+        if hasattr(self, 'criterion'):
+            self.criterion = self.criterion.to(device)
+        return self
+
     def set_input(self, *inputs):
         # self.input.resize_(inputs[0].size()).copy_(inputs[0])
         for idx, _input in enumerate(inputs):
@@ -72,21 +84,20 @@ class FeedForwardSegmentation(BaseModel):
 
             # Define that it's a cuda array
             if idx == 0:
-                self.input = _input.cuda() if self.use_cuda else _input
+                self.input = _input.to(self.device)
             elif idx == 1:
-                self.target = Variable(_input.cuda()) if self.use_cuda else Variable(_input)
+                self.target = Variable(_input.to(self.device))
                 self.target = self.target.expand(self.input.size(0), self.input.size(1), -1, -1)
-                # print(f"#### DEBUG #### \n Input shape: {self.input.size()} \n Target shape: {self.target.size()} \n ############")
-                # assert self.input.size()[1:] == self.target.size()[1:]  # update -> compares only spatial dimensions since CityScapes has RGB channels
                 assert self.input.size() == self.target.size()
 
     def forward(self, split):
         if split == 'train':
             # print(f"Input to net shape: {self.input.size()}")
-            self.prediction = self.net(Variable(self.input))
+            self.prediction = self.net(Variable(self.input.to(self.device)))
             # print(f"Output shape: {self.prediction.size()}")
         elif split == 'test':
-            self.prediction = self.net(Variable(self.input, volatile=True))
+            with torch.no_grad():  # `volatile` is deprecated, replaced with no_grad
+                self.prediction = self.net(Variable(self.input.to(self.device)))
             # Apply a softmax and return a segmentation map
             self.logits = self.net.apply_argmax_softmax(self.prediction)
             self.pred_seg = self.logits.data.max(1)[1].unsqueeze(1)

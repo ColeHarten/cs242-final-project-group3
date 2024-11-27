@@ -1,4 +1,5 @@
 import numpy
+import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
@@ -14,6 +15,8 @@ from models import get_model
 
 from torchvision.datasets import Cityscapes
 from torchvision.transforms import Compose, ToTensor, Normalize, Resize
+
+device = torch.device("cuda")
 
 def get_cityscapes_transforms():
     # For the input image
@@ -52,8 +55,12 @@ def train(arguments):
     json_opts = json_file_to_pyobj(json_filename)
     train_opts = json_opts.training
 
+    #gpu support
+    device = torch.device("cuda")
+
     # Setup the NN Model
     model = get_model(json_opts.model)
+    model = model.to(device)
 
     # Get input and target transforms
     input_transform, target_transform = get_cityscapes_transforms()
@@ -70,9 +77,9 @@ def train(arguments):
                                           target_transform=target_transform)
 
     # DataLoaders
-    train_loader = DataLoader(dataset=train_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=True)
-    valid_loader = DataLoader(dataset=valid_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
-    test_loader = DataLoader(dataset=test_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False)
+    train_loader = DataLoader(dataset=train_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=True, pin_memory=True)
+    valid_loader = DataLoader(dataset=valid_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False, pin_memory=True)
+    test_loader = DataLoader(dataset=test_dataset, num_workers=4, batch_size=train_opts.batchSize, shuffle=False, pin_memory=True)
 
     # Print the first input-target pair
     # input_img, target_mask = train_dataset[0]
@@ -95,6 +102,9 @@ def train(arguments):
 
         # Training Iterations
         for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader)):
+            images = images.to(device)  # Move images to GPU
+            labels = labels.to(device)  # Move labels to GPU
+
             # Make a training update
             model.set_input(images, labels)
             model.optimize_parameters()
@@ -107,6 +117,8 @@ def train(arguments):
         # Validation and Testing Iterations
         for loader, split in zip([valid_loader, test_loader], ['validation', 'test']):
             for epoch_iter, (images, labels) in tqdm(enumerate(loader, 1), total=len(loader)):
+                images = images.to(device)  # Move images to GPU
+                labels = labels.to(device)  # Move labels to GPU
 
                 # Make a forward pass with the model
                 model.set_input(images, labels)
