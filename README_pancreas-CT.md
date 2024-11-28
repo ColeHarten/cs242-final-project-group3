@@ -10,12 +10,17 @@
    2. When I tried to train the model with these `.nii` files, the axes needed to be re-permuted. This is where the script `fix_data_dims.py` comes in.
       1. The final data directory ultimately should look something like:
          data
+
          |____ train
+
          |____ test
+
          |____ validation
       2. And then each folder should have image/label subdirectories:
          train
+
          |___ image
+
          |___ label
 3. You’ll need to download **torchsample** that the old model uses by doing the following steps:
 
