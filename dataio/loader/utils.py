@@ -4,7 +4,7 @@ import os
 from utils.util import mkdir
 
 def is_image_file(filename):
-    return any(filename.endswith(extension) for extension in [".nii.gz"])
+    return any(filename.endswith(extension) for extension in [".nii.gz", ".nii"])
 
 
 def load_nifti_img(filepath, dtype):
@@ -15,9 +15,9 @@ def load_nifti_img(filepath, dtype):
     :return: return numpy array
     '''
     nim = nib.load(filepath)
-    out_nii_array = np.array(nim.get_data(),dtype=dtype)
+    out_nii_array = np.array(nim.get_fdata(),dtype=dtype)
     out_nii_array = np.squeeze(out_nii_array) # drop singleton dim in case temporal dim exists
-    meta = {'affine': nim.get_affine(),
+    meta = {'affine': nim.affine,
             'dim': nim.header['dim'],
             'pixdim': nim.header['pixdim'],
             'name': os.path.basename(filepath)

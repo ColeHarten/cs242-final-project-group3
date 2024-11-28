@@ -1,7 +1,6 @@
 import torchsample.transforms as ts
 from pprint import pprint
 
-
 class Transformations:
 
     def __init__(self, name):
