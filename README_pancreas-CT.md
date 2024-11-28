@@ -9,7 +9,8 @@
    1. First, you should run `dem_to_nii_converter.py` in the directory that you unzip ur data, which will recursively grab the `.dcm` files and then join them into `.nii` files and label them consistently. It should also output them into train/test splits.
    2. When I tried to train the model with these `.nii` files, the axes needed to be re-permuted. This is where the script `fix_data_dims.py` comes in.
       1. The final data directory ultimately should look something like:
-         data
+         
+data
 
          |____ train
 
@@ -17,7 +18,8 @@
 
          |____ validation
       2. And then each folder should have image/label subdirectories:
-         train
+         
+train
 
          |___ image
 
