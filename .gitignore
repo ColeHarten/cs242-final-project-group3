@@ -117,3 +117,5 @@ flycheck*
 /pancreas_CT
 *.err
 *.out
+
+data/
