@@ -16,6 +16,7 @@ data
 |____ validation
 ```
       2. And then each folder should have image/label subdirectories:        
+
 ```
 train
 |___ image
