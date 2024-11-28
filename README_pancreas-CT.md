@@ -8,20 +8,24 @@
 
    1. First, you should run `dem_to_nii_converter.py` in the directory that you unzip ur data, which will recursively grab the `.dcm` files and then join them into `.nii` files and label them consistently. It should also output them into train/test splits.
    2. When I tried to train the model with these `.nii` files, the axes needed to be re-permuted. This is where the script `fix_data_dims.py` comes in.
-      1. The final data directory ultimately should look something like:         
+      1. The final data directory ultimately should look something like:
+
 ```
 data
 |____ train
 |____ test
 |____ validation
 ```
-      2. And then each folder should have image/label subdirectories:        
+
+
+- And then each folder should have image/label subdirectories:
 
 ```
 train
 |___ image
 |___ label
 ```
+
 3. You’ll need to download **torchsample** that the old model uses by doing the following steps:
 
    1. `pip uninstall torchsample` (if you already tried installing it)
@@ -32,6 +36,25 @@ train
 5. All other code changes i made to update deprecated packages etc. are in the `pancreas-CT` branch of our git repo. Pull that to start training before you do steps 1-4. **Do not overwite any changes.**
 
 #### Common bugs
+
 - If you get an error message saying something expected XXXX bytes but got XXXX bytes instead during pre-loading, the data conversion likely got interrupted somewhere (maybe due to OOM) -> temporary fix is to remove that image and the corresponding label from the `image` and `label` directories.
 - The default for `num_workers` is 16, but I recommend setting it to 1, otherwise you may also get warnings and the process may kill itself
 - For an interactive GPU session, I recommend adding this to your `~/.bashrc` on the cluster: `alias gpusession="salloc -p gpu_requeue --mem 99G -t 12:00:00 --gres=gpu:nvidia_a100-sxm4-80gb:1"`
+
+### Cluster Notes
+
+To view which node a job ran on:
+
+`sacct -j <job_id> --format=JobID,JobName,Partition,State,NodeList`
+
+List of faulty nodes:
+
+- holygpu8a31305
+- holygpu8a31402
+- holygpu8a31202
+
+Exclude faulty nodes after `srun` or `sbatch` with `--exclude=holygpu8a31305,holygpu8a31402,holygpu8a31202`
+
+Well-behaved nodes:
+
+- holygpu8a29104
