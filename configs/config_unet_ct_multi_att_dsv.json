@@ -1,8 +1,8 @@
 {
   "training":{
     "arch_type": "acdc_sax",
-    "n_epochs": 1000,
-    "save_epoch_freq": 10,
+    "n_epochs": 50,
+    "save_epoch_freq": 5,
     "lr_policy": "step",
     "lr_decay_iters": 250,
     "batchSize": 2,
