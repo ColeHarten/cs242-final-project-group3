@@ -13,11 +13,14 @@
 data
 |____ train
 |____ test
-|____ validation```
+|____ validation
+```
       2. And then each folder should have image/label subdirectories:        
-```train
+```
+train
 |___ image
-|___ label```
+|___ label
+```
 3. You’ll need to download **torchsample** that the old model uses by doing the following steps:
 
    1. `pip uninstall torchsample` (if you already tried installing it)
