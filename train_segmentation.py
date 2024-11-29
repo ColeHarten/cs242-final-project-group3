@@ -1,15 +1,19 @@
 import numpy
+import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 
 from dataio.loader import get_dataset, get_dataset_path
 from dataio.transformation import get_dataset_transformation
+from utils import error_logger
 from utils.util import json_file_to_pyobj
 from utils.visualiser import Visualiser
 from utils.error_logger import ErrorLogger
 
 from models import get_model
+
+from collections import defaultdict
 
 def train(arguments):
 
@@ -48,17 +52,30 @@ def train(arguments):
     # visualizer = Visualiser(json_opts.visualisation, save_dir=model.save_dir)
     # error_logger = ErrorLogger()
 
+
+    # Initialize storage for class probabilities
+    class_probs = defaultdict(list)
+
     # Training Function
     model.set_scheduler(train_opts)
     for epoch in range(model.which_epoch, train_opts.n_epochs):
         print('(epoch: %d, total # iters: %d)' % (epoch, len(train_loader)))
 
-        # Training Iterations
+        # Training Iterations (Lei Temporarily Modified)
         for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader)):
             # Make a training update
             model.set_input(images, labels)
             model.optimize_parameters()
             #model.optimize_parameters_accumulate_grd(epoch_iter)
+
+            # Collect probabilities for thresholds
+            with torch.no_grad():
+                logits = model.get_logits()  # Replace with your model's logits retrieval function
+                probs = torch.nn.functional.softmax(logits, dim=1)
+                for cls in range(probs.shape[1]):
+                    class_mask = (labels == cls)
+                    if class_mask.any():
+                        class_probs[cls].append(probs[:, cls][class_mask].mean().item())
 
             # Error visualisation
             errors = model.get_current_errors()
@@ -99,6 +116,20 @@ def train(arguments):
 
         # Update the model learning rate
         model.update_learning_rate()
+
+    # Compute thresholds after training
+    thresholds = []
+    for cls in range(len(class_probs)):
+        if len(class_probs[cls]) == 0:
+            thresholds.append(0)
+        else:
+            sorted_probs = sorted(class_probs[cls], reverse=True)
+            T_k = sorted_probs[0] - sorted_probs[1] if len(sorted_probs) > 1 else sorted_probs[0]
+            thresholds.append(T_k)
+
+    # Save thresholds
+    torch.save(thresholds, 'thresholds.pt')
+    print(f"Thresholds computed and saved: {thresholds}")
 
 
 if __name__ == '__main__':
