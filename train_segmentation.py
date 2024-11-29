@@ -81,6 +81,12 @@ def train(arguments):
                 # visuals = model.get_current_visuals()
                 # visualizer.display_current_results(visuals, epoch=epoch, save_result=False)
 
+        print("--------------------------------------")
+        for split in ['train', 'validation', 'test']:
+            epoch_errors = error_logger.get_errors(split)
+            print(f"Epoch {epoch} {split} errors: {epoch_errors}")
+        print("--------------------------------------")
+        
         # Update the plots
         # for split in ['train', 'validation', 'test']:
             # visualizer.plot_current_errors(epoch, error_logger.get_errors(split), split_name=split)
