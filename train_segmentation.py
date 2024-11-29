@@ -36,6 +36,11 @@ def train(arguments):
 
     # Setup the NN Model
     model = get_model(json_opts.model)
+    try:
+        model.set_thresholds('thresholds.pt')
+    except Exception as e:
+        print(f"Failed to load thresholds: {e}")
+
     if network_debug:
         print('# of pars: ', model.get_number_parameters())
         print('fp time: {0:.3f} sec\tbp time: {1:.3f} sec per sample'.format(*model.get_fp_bp_time()))
