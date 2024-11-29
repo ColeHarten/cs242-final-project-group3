@@ -24,6 +24,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
         self.thresholds = None  # Define thresholds for early exit
 
+        # Storage for layer outputs
+        self.layer_outputs = {}  # Dictionary to store outputs for all layers
+
         # downsampling
         self.conv1 = UnetConv3(self.in_channels, filters[0], self.is_batchnorm, kernel_size=(3,3,3), padding_size=(1,1,1))
         self.maxpool1 = nn.MaxPool3d(kernel_size=(2, 2, 2))
@@ -127,10 +130,15 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         # Decoder
         g_conv4, att4 = self.attentionblock4(conv4, gating)
         up4 = self.up_concat4(g_conv4, center)
+        self.layer_outputs['up_concat4'] = up4
+
         g_conv3, att3 = self.attentionblock3(conv3, up4)
         up3 = self.up_concat3(g_conv3, up4)
+        self.layer_outputs['up_concat3'] = up3
+
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
+        self.layer_outputs['up_concat2'] = up2
 
         # Early exit logic
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
