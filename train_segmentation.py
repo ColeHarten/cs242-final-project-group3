@@ -1,6 +1,7 @@
 import numpy
 import torch
 from torch.utils.data import DataLoader
+from torch.nn import functional as F
 from tqdm import tqdm
 
 
@@ -53,8 +54,8 @@ def train(arguments):
     # error_logger = ErrorLogger()
 
 
-    # Initialize storage for class probabilities
-    class_probs = defaultdict(list)
+    # Initialize storage for class probabilities at each layer
+    layer_probs = defaultdict(lambda: defaultdict(list))
 
     # Training Function
     model.set_scheduler(train_opts)
@@ -68,14 +69,14 @@ def train(arguments):
             model.optimize_parameters()
             #model.optimize_parameters_accumulate_grd(epoch_iter)
 
-            # Collect probabilities for thresholds
+            # Collect probabilities for each layer
             with torch.no_grad():
-                logits = model.get_logits()  # Replace with your model's logits retrieval function
-                probs = torch.nn.functional.softmax(logits, dim=1)
-                for cls in range(probs.shape[1]):
-                    class_mask = (labels == cls)
-                    if class_mask.any():
-                        class_probs[cls].append(probs[:, cls][class_mask].mean().item())
+                for layer_name, feature_map in model.layer_outputs.items():
+                    probs = F.softmax(feature_map, dim=1)  # Convert logits to probabilities
+                    for cls in range(probs.shape[1]):  # Iterate over classes
+                        class_mask = (labels == cls)
+                        if class_mask.any():
+                            layer_probs[layer_name][cls].append(probs[:, cls][class_mask].mean().item())
 
             # Error visualisation
             errors = model.get_current_errors()
@@ -117,19 +118,35 @@ def train(arguments):
         # Update the model learning rate
         model.update_learning_rate()
 
-    # Compute thresholds after training
+    # Average probabilities across all layers
+    class_mean_probs = defaultdict(list)
+    for cls in range(model.n_classes):
+        layer_means = []
+        for layer_name in layer_probs:
+            if len(layer_probs[layer_name][cls]) > 0:
+                layer_means.append(sum(layer_probs[layer_name][cls]) / len(layer_probs[layer_name][cls]))
+        if layer_means:
+            class_mean_probs[cls] = sum(layer_means) / len(layer_means)
+
+    # Compute and scale thresholds
     thresholds = []
-    for cls in range(len(class_probs)):
-        if len(class_probs[cls]) == 0:
+    alpha, beta = 0.95, 0.998 # hyperparameters for threshold scaling
+    for cls in range(model.n_classes):
+        if cls not in class_mean_probs or not class_mean_probs[cls]:
             thresholds.append(0)
         else:
-            sorted_probs = sorted(class_probs[cls], reverse=True)
+            sorted_probs = sorted(class_mean_probs[cls], reverse=True)
             T_k = sorted_probs[0] - sorted_probs[1] if len(sorted_probs) > 1 else sorted_probs[0]
             thresholds.append(T_k)
 
-    # Save thresholds
-    torch.save(thresholds, 'thresholds.pt')
-    print(f"Thresholds computed and saved: {thresholds}")
+    min_T, max_T = min(thresholds), max(thresholds)
+    scaled_thresholds = [
+        (1 - (T_k - min_T) / (max_T - min_T)) * (beta - alpha) + alpha if max_T > min_T else alpha
+        for T_k in thresholds
+    ]
+
+    torch.save(scaled_thresholds, 'thresholds.pt')
+    print(f"Scaled thresholds saved: {scaled_thresholds}")
 
 
 if __name__ == '__main__':
