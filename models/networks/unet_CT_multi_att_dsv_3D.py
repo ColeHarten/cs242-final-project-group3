@@ -73,6 +73,15 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
             elif isinstance(m, nn.BatchNorm3d):
                 init_weights(m, init_type='kaiming')
 
+    def set_thresholds(self, thresholds_path):
+        try:
+            self.thresholds = torch.load(thresholds_path)
+            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
+        except Exception as e:
+            print(f"Error loading thresholds: {e}")
+            self.thresholds = None
+
+    # (Lei) Original forward function with no early exit
     # def forward(self, inputs):
     #     # Feature Extraction
     #     conv1 = self.conv1(inputs)
@@ -111,6 +120,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
     #     return final
 
     def forward(self, inputs):
+        if self.thresholds is None:
+            raise ValueError("Thresholds have not been set. Load thresholds using set_thresholds().")
+
         # Encoder
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
@@ -139,7 +151,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
         self.layer_outputs['up_concat2'] = up2
-
+    
         # Early exit logic
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
             early_exit_logits = self.early_exit(up2)  # Predict segmentation logits
