@@ -54,6 +54,7 @@ List of faulty nodes:
 - holygpu8a31305
 - holygpu8a31402
 - holygpu8a31202
+- holygpu8a25104
 
 Exclude faulty nodes after `srun` or `sbatch` with `--exclude=holygpu8a31305,holygpu8a31402,holygpu8a31202`
 
