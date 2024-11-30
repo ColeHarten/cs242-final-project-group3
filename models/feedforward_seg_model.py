@@ -26,9 +26,8 @@ class FeedForwardSegmentation(BaseModel):
         self.target = None
         self.tensor_dim = opts.tensor_dim
 
-        self.thresholds = None  # Define thresholds for early exit in attention unet for CT scans
-        self.layer_outputs = {} 
-
+        self.thresholds = None
+        self.layer_outputs = {}
 
         # load/define networks
         self.net = get_network(opts.model_type, n_classes=opts.output_nc,
@@ -124,6 +123,14 @@ class FeedForwardSegmentation(BaseModel):
         self.net.eval()
         self.forward(split='test')
         self.loss_S = self.criterion(self.prediction, self.target)
+
+    def set_thresholds(self, thresholds_path):
+        try:
+            self.thresholds = torch.load(thresholds_path)
+            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
+        except Exception as e:
+            print(f"Error loading thresholds: {e}")
+            self.thresholds = None
 
     def get_segmentation_stats(self):
         self.seg_scores, self.dice_score = segmentation_stats(self.prediction, self.target)
