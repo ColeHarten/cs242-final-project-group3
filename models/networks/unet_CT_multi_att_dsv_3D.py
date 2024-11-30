@@ -25,7 +25,19 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.thresholds = None  # Define thresholds for early exit
         self.layer_outputs = {}  # Dictionary to store outputs for all layers
 
-        # downsampling
+        self.early_exit_layer_name = 'up_concat2'  # Dynamically associate the target layer
+        self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)  # Early exit head
+
+        self.thresholds = None  # Define thresholds for early exit
+        self.layer_outputs = {}  # Dictionary to store outputs for all layers
+
+        self.early_exit_layer_name = 'up_concat2'  # Dynamically associate the target layer
+        self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)  # Early exit head
+
+        self.thresholds = None  # Define thresholds for early exit
+        self.layer_outputs = {}  # Dictionary to store outputs for all layers
+
+        # downsampling–
         self.conv1 = UnetConv3(self.in_channels, filters[0], self.is_batchnorm, kernel_size=(3,3,3), padding_size=(1,1,1))
         self.maxpool1 = nn.MaxPool3d(kernel_size=(2, 2, 2))
 
