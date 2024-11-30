@@ -9,6 +9,7 @@ from torch.nn import CrossEntropyLoss
 from utils.metrics import segmentation_scores, dice_score_list
 from sklearn import metrics
 from .layers.loss import *
+from ptflops import get_model_complexity_info
 
 def get_optimizer(option, params):
     opt_alg = 'sgd' if not hasattr(option, 'optim') else option.optim
@@ -73,27 +74,55 @@ def adjust_learning_rate(optimizer, init_lr, epoch):
         param_group['lr'] = lr
 
 
-def segmentation_stats(pred_seg, target):
+
+def segmentation_stats_with_flops(model, pred_seg, target):
+    """
+    Computes segmentation stats (IoU and Dice) and model FLOPs.
+    
+    Parameters:
+        model (torch.nn.Module): The model used for prediction.
+        pred_seg (torch.Tensor): Predicted segmentation logits of shape [B, C, H, W].
+        target (torch.Tensor): Ground truth labels of shape [B, 1, H, W] or [B, H, W].
+
+    Returns:
+        tuple: IoU, Dice, FLOPs (in GFLOPs)
+    """
+    # Number of classes in the prediction
     n_classes = pred_seg.size(1)
-    
-    # Move pred_seg and target to CPU and convert to NumPy arrays
-    pred_lbls = pred_seg.data.max(1)[1].cpu().numpy()  # Fix: Move to CPU before calling numpy()
-    
-    # Check if target has more than one channel dimension
-    target_np = target.data.cpu().numpy()
-    
-    gt = target_np[ :, 0, :, :]
-    
-#     if target_np.shape[1] == 1:  # If only one channel, squeeze it
-#         gt = np.squeeze(target_np, axis=1)
-#     else:
-#         gt = target_np  # If not, leave it as is
-        
+
+    # Convert logits to class indices for predictions
+    pred_lbls = pred_seg.data.max(1)[1].cpu().numpy()
+
+    # Squeeze target to remove channel dimension
+    gt = np.squeeze(target.data.cpu().numpy(), axis=1)
+
+    # Prepare flattened lists of ground truth and predictions
     gts, preds = [], []
     for gt_, pred_ in zip(gt, pred_lbls):
         gts.append(gt_)
         preds.append(pred_)
-        
+
+    # Compute IoU and Dice
+    iou = segmentation_scores(gts, preds, n_class=n_classes)
+    dice = dice_score_list(gts, preds, n_class=n_classes)
+
+    # Compute FLOPs for a single forward pass
+    input_shape = tuple(pred_seg.size()[1:])  # Get input shape (C, H, W) from pred_seg
+    macs, _ = get_model_complexity_info(model, input_shape, as_strings=False, verbose=False)
+    flops_in_gflops = macs / 1e9  # Convert to GFLOPs
+
+    return iou, dice, flops_in_gflops
+
+
+def segmentation_stats(pred_seg, target):
+    n_classes = pred_seg.size(1)
+    pred_lbls = pred_seg.data.max(1)[1].cpu().numpy()
+    gt = np.squeeze(target.data.cpu().numpy(), axis=1)
+    gts, preds = [], []
+    for gt_, pred_ in zip(gt, pred_lbls):
+        gts.append(gt_)
+        preds.append(pred_)
+
     iou = segmentation_scores(gts, preds, n_class=n_classes)
     dice = dice_score_list(gts, preds, n_class=n_classes)
 
