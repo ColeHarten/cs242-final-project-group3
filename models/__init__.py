@@ -82,9 +82,8 @@ def get_model(json_opts):
         from .aggregated_classifier import AggregatedClassifier
         model = AggregatedClassifier()
 
-
     # Initialise the created model
-    model.initialize(model_opts)
+    model.initialize(model_opts, verbose=False)
     print("Model [%s] is created" % (model.name()))
 
     return model

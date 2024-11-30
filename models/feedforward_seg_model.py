@@ -52,6 +52,7 @@ class FeedForwardSegmentation(BaseModel):
             self.optimizer_S = get_optimizer(opts, self.net.parameters())
             self.optimizers.append(self.optimizer_S)
 
+            
             # print the network details
             # print the network details
             if kwargs.get('verbose', True):
