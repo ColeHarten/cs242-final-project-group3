@@ -1,0 +1,719 @@
+--------------------------------------
+Epoch 0 train errors: {'Seg_Loss': 0.8905722444707697}
+Epoch 0 validation errors: {'Seg_Loss': 0.8493994048663548, 'Overall_Acc': 0.5076792689732142, 'Mean_IOU': 0.13074440309079008, 'Class_0': 0.6759471723011562, 'Class_1': 0.017012116233153, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 0 test errors: {'Seg_Loss': 0.8524491588274637, 'Overall_Acc': 0.48365313494646994, 'Mean_IOU': 0.12623374873624524, 'Class_0': 0.6505461997456021, 'Class_1': 0.028952609333727095, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 0
+current learning rate = 0.0001000
+(epoch: 1, total # iters: 22)
+--------------------------------------
+Epoch 1 train errors: {'Seg_Loss': 0.8887173127044331}
+Epoch 1 validation errors: {'Seg_Loss': 0.8600399664470127, 'Overall_Acc': 0.41897155761718746, 'Mean_IOU': 0.1106002431518239, 'Class_0': 0.5915913241250175, 'Class_1': 0.034378772867577415, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 1 test errors: {'Seg_Loss': 0.8637602064344618, 'Overall_Acc': 0.39084897641782407, 'Mean_IOU': 0.10456662557276267, 'Class_0': 0.5550604230827756, 'Class_1': 0.04415064036018319, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 2, total # iters: 22)
+--------------------------------------
+Epoch 2 train errors: {'Seg_Loss': 0.8882363384420221}
+Epoch 2 validation errors: {'Seg_Loss': 0.8596845780100141, 'Overall_Acc': 0.42872512090773807, 'Mean_IOU': 0.11332769453816158, 'Class_0': 0.6004095332963126, 'Class_1': 0.03760017640888691, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 2 test errors: {'Seg_Loss': 0.8637020124329461, 'Overall_Acc': 0.391150060583044, 'Mean_IOU': 0.10522441874504457, 'Class_0': 0.5564796891477373, 'Class_1': 0.04894521915250354, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 3, total # iters: 22)
+--------------------------------------
+Epoch 3 train errors: {'Seg_Loss': 0.8856046335263685}
+Epoch 3 validation errors: {'Seg_Loss': 0.8603129812649318, 'Overall_Acc': 0.42572102864583333, 'Mean_IOU': 0.11276630079516717, 'Class_0': 0.5972849471228463, 'Class_1': 0.03838293786559786, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 3 test errors: {'Seg_Loss': 0.8645188146167331, 'Overall_Acc': 0.3867614972149884, 'Mean_IOU': 0.10400115861188505, 'Class_0': 0.5522115959061517, 'Class_1': 0.047392531401581235, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 4, total # iters: 22)
+--------------------------------------
+Epoch 4 train errors: {'Seg_Loss': 0.8821901408108798}
+Epoch 4 validation errors: {'Seg_Loss': 0.853651932307652, 'Overall_Acc': 0.4879550897507441, 'Mean_IOU': 0.12787061273529426, 'Class_0': 0.6514919315065656, 'Class_1': 0.034494088031351566, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 4 test errors: {'Seg_Loss': 0.858808610174391, 'Overall_Acc': 0.43102138943142365, 'Mean_IOU': 0.11518116671060048, 'Class_0': 0.5972132086753845, 'Class_1': 0.046934993316729866, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 5, total # iters: 22)
+--------------------------------------
+Epoch 5 train errors: {'Seg_Loss': 0.8794259889559313}
+Epoch 5 validation errors: {'Seg_Loss': 0.8538793069975716, 'Overall_Acc': 0.5094174630301339, 'Mean_IOU': 0.1332439207678046, 'Class_0': 0.6731223038264683, 'Class_1': 0.0344251561909914, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 5 test errors: {'Seg_Loss': 0.858821279472775, 'Overall_Acc': 0.46063225640190975, 'Mean_IOU': 0.12220933306675416, 'Class_0': 0.6233040425512526, 'Class_1': 0.04366329684853554, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 5
+current learning rate = 0.0001000
+(epoch: 6, total # iters: 22)
+--------------------------------------
+Epoch 6 train errors: {'Seg_Loss': 0.8779844993894751}
+Epoch 6 validation errors: {'Seg_Loss': 0.8504021508353097, 'Overall_Acc': 0.5399085053943453, 'Mean_IOU': 0.1408367918131714, 'Class_0': 0.69600738797869, 'Class_1': 0.03397710341960192, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 6 test errors: {'Seg_Loss': 0.8565632303555807, 'Overall_Acc': 0.4801836027922454, 'Mean_IOU': 0.127223282632854, 'Class_0': 0.6397062142690023, 'Class_1': 0.043751741035117045, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 7, total # iters: 22)
+--------------------------------------
+Epoch 7 train errors: {'Seg_Loss': 0.8759739263491197}
+Epoch 7 validation errors: {'Seg_Loss': 0.8467681578227452, 'Overall_Acc': 0.5755903552827382, 'Mean_IOU': 0.14935723251950955, 'Class_0': 0.7257770895957947, 'Class_1': 0.030846431319202696, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 7 test errors: {'Seg_Loss': 0.8530357215139601, 'Overall_Acc': 0.5162458179615163, 'Mean_IOU': 0.13578958258163587, 'Class_0': 0.6713854736751981, 'Class_1': 0.039977772885726556, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 8, total # iters: 22)
+--------------------------------------
+Epoch 8 train errors: {'Seg_Loss': 0.8737069693478671}
+Epoch 8 validation errors: {'Seg_Loss': 0.8453144260815212, 'Overall_Acc': 0.596029808407738, 'Mean_IOU': 0.1541226977809931, 'Class_0': 0.7402976495879037, 'Class_1': 0.028255290484854152, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 8 test errors: {'Seg_Loss': 0.8520956436793009, 'Overall_Acc': 0.5342426215277778, 'Mean_IOU': 0.14028357854333467, 'Class_0': 0.6854807734489441, 'Class_1': 0.040039877510733075, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 9, total # iters: 22)
+--------------------------------------
+Epoch 9 train errors: {'Seg_Loss': 0.8694222244349393}
+Epoch 9 validation errors: {'Seg_Loss': 0.8413131577627999, 'Overall_Acc': 0.631595226469494, 'Mean_IOU': 0.1627184814343874, 'Class_0': 0.7682004145213536, 'Class_1': 0.025874149719519273, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 9 test errors: {'Seg_Loss': 0.847912245326572, 'Overall_Acc': 0.5727263952184606, 'Mean_IOU': 0.14927239883691593, 'Class_0': 0.7168423732121786, 'Class_1': 0.035269007035013705, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 10, total # iters: 22)
+--------------------------------------
+Epoch 10 train errors: {'Seg_Loss': 0.8687174780802294}
+Epoch 10 validation errors: {'Seg_Loss': 0.8412102035113743, 'Overall_Acc': 0.6391914585658481, 'Mean_IOU': 0.16476641904592865, 'Class_0': 0.7731625097138541, 'Class_1': 0.025837429000863006, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 10 test errors: {'Seg_Loss': 0.8482427928182814, 'Overall_Acc': 0.5801874231409143, 'Mean_IOU': 0.15110899665361088, 'Class_0': 0.7213528752326965, 'Class_1': 0.03520865769435962, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 10
+current learning rate = 0.0001000
+(epoch: 11, total # iters: 22)
+--------------------------------------
+Epoch 11 train errors: {'Seg_Loss': 0.8659257428212599}
+Epoch 11 validation errors: {'Seg_Loss': 0.8388788785253253, 'Overall_Acc': 0.6493769473121278, 'Mean_IOU': 0.16773368540787412, 'Class_0': 0.7800053102629525, 'Class_1': 0.029511750476168736, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 11 test errors: {'Seg_Loss': 0.8465639220343696, 'Overall_Acc': 0.5887727412471064, 'Mean_IOU': 0.15321149442265927, 'Class_0': 0.7268947495354546, 'Class_1': 0.03524496437360843, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 12, total # iters: 22)
+--------------------------------------
+Epoch 12 train errors: {'Seg_Loss': 0.8633357286453247}
+Epoch 12 validation errors: {'Seg_Loss': 0.8288967524256025, 'Overall_Acc': 0.7190686616443452, 'Mean_IOU': 0.18389340640329385, 'Class_0': 0.8302716868264335, 'Class_1': 0.020991399119208966, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 12 test errors: {'Seg_Loss': 0.8366195294592116, 'Overall_Acc': 0.6628929533781828, 'Mean_IOU': 0.17104705355494706, 'Class_0': 0.784929182794359, 'Class_1': 0.030675203642911382, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 13, total # iters: 22)
+--------------------------------------
+Epoch 13 train errors: {'Seg_Loss': 0.8599363944747231}
+Epoch 13 validation errors: {'Seg_Loss': 0.8282943964004517, 'Overall_Acc': 0.7213306535993304, 'Mean_IOU': 0.1845797978309023, 'Class_0': 0.829660279410226, 'Class_1': 0.021272936120762358, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 13 test errors: {'Seg_Loss': 0.8359825544887118, 'Overall_Acc': 0.6677264630353009, 'Mean_IOU': 0.17227967552187426, 'Class_0': 0.7860097686449686, 'Class_1': 0.03130516342611776, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 14, total # iters: 22)
+--------------------------------------
+Epoch 14 train errors: {'Seg_Loss': 0.8562736186114225}
+Epoch 14 validation errors: {'Seg_Loss': 0.8297818217958722, 'Overall_Acc': 0.725302501860119, 'Mean_IOU': 0.18546520185537588, 'Class_0': 0.8350687112127032, 'Class_1': 0.02064631144250078, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 14 test errors: {'Seg_Loss': 0.8364363114039103, 'Overall_Acc': 0.6720229763454861, 'Mean_IOU': 0.17287713647510836, 'Class_0': 0.7919756968816122, 'Class_1': 0.02818241311858098, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 15, total # iters: 22)
+--------------------------------------
+Epoch 15 train errors: {'Seg_Loss': 0.8547859489917755}
+Epoch 15 validation errors: {'Seg_Loss': 0.8353574020521981, 'Overall_Acc': 0.671920660109747, 'Mean_IOU': 0.17373640304032678, 'Class_0': 0.7938151444707598, 'Class_1': 0.030758883537990705, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 15 test errors: {'Seg_Loss': 0.844861818684472, 'Overall_Acc': 0.609149848090278, 'Mean_IOU': 0.1581634482320956, 'Class_0': 0.7382557392120361, 'Class_1': 0.0345173172859682, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 15
+current learning rate = 0.0001000
+(epoch: 16, total # iters: 22)
+--------------------------------------
+Epoch 16 train errors: {'Seg_Loss': 0.8522607602856376}
+Epoch 16 validation errors: {'Seg_Loss': 0.8304333942277091, 'Overall_Acc': 0.694821050734747, 'Mean_IOU': 0.17905285121213202, 'Class_0': 0.8092057960374015, 'Class_1': 0.02739468276766794, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 16 test errors: {'Seg_Loss': 0.8400182194179959, 'Overall_Acc': 0.6325046115451389, 'Mean_IOU': 0.16387053949856337, 'Class_0': 0.7553829285833571, 'Class_1': 0.03384106792509556, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 17, total # iters: 22)
+--------------------------------------
+Epoch 17 train errors: {'Seg_Loss': 0.8483791811899706}
+Epoch 17 validation errors: {'Seg_Loss': 0.8308078050613403, 'Overall_Acc': 0.68349853515625, 'Mean_IOU': 0.17635580407055937, 'Class_0': 0.7983238526753017, 'Class_1': 0.028742561050291573, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 17 test errors: {'Seg_Loss': 0.8412736455599467, 'Overall_Acc': 0.6223021330656828, 'Mean_IOU': 0.16133199203834436, 'Class_0': 0.7457346320152283, 'Class_1': 0.034365484284030065, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 18, total # iters: 22)
+--------------------------------------
+Epoch 18 train errors: {'Seg_Loss': 0.8473982621322979}
+Epoch 18 validation errors: {'Seg_Loss': 0.8271515710013253, 'Overall_Acc': 0.7097104317801339, 'Mean_IOU': 0.1827949070960647, 'Class_0': 0.8200821876525879, 'Class_1': 0.027533713595143387, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 18 test errors: {'Seg_Loss': 0.8371366063753763, 'Overall_Acc': 0.6484049253110532, 'Mean_IOU': 0.16751482447416344, 'Class_0': 0.7675290571318732, 'Class_1': 0.031842634133580655, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 19, total # iters: 22)
+--------------------------------------
+Epoch 19 train errors: {'Seg_Loss': 0.8448065465146845}
+Epoch 19 validation errors: {'Seg_Loss': 0.8211755411965507, 'Overall_Acc': 0.746729997907366, 'Mean_IOU': 0.19132773002106385, 'Class_0': 0.846941956451961, 'Class_1': 0.02310102920247508, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 19 test errors: {'Seg_Loss': 0.829831620057424, 'Overall_Acc': 0.6938647913049769, 'Mean_IOU': 0.17814553629573748, 'Class_0': 0.8037070102161832, 'Class_1': 0.02807463514101174, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 20, total # iters: 22)
+--------------------------------------
+Epoch 20 train errors: {'Seg_Loss': 0.8438813496719707}
+Epoch 20 validation errors: {'Seg_Loss': 0.8233525497572762, 'Overall_Acc': 0.7153431338355655, 'Mean_IOU': 0.18412468538156898, 'Class_0': 0.821619280747005, 'Class_1': 0.02695788043950285, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 20 test errors: {'Seg_Loss': 0.8335948785146078, 'Overall_Acc': 0.6586411539713541, 'Mean_IOU': 0.17000075575896648, 'Class_0': 0.7730018628968133, 'Class_1': 0.03153896130000552, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 20
+current learning rate = 0.0001000
+(epoch: 21, total # iters: 22)
+--------------------------------------
+Epoch 21 train errors: {'Seg_Loss': 0.8398219997232611}
+Epoch 21 validation errors: {'Seg_Loss': 0.814877952848162, 'Overall_Acc': 0.7642678106398809, 'Mean_IOU': 0.19537094359374127, 'Class_0': 0.858414786202567, 'Class_1': 0.02035199062499617, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 21 test errors: {'Seg_Loss': 0.8234836988978915, 'Overall_Acc': 0.7154127785011575, 'Mean_IOU': 0.1832781653984759, 'Class_0': 0.8189910915162828, 'Class_1': 0.02661114087742236, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 22, total # iters: 22)
+--------------------------------------
+Epoch 22 train errors: {'Seg_Loss': 0.8377772325819189}
+Epoch 22 validation errors: {'Seg_Loss': 0.8238376038415092, 'Overall_Acc': 0.7110129801432292, 'Mean_IOU': 0.18321197745491288, 'Class_0': 0.8187931946345738, 'Class_1': 0.027920369724077836, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 22 test errors: {'Seg_Loss': 0.8348103761672974, 'Overall_Acc': 0.6511133264612269, 'Mean_IOU': 0.16804872247314917, 'Class_0': 0.7665456202295091, 'Class_1': 0.031309072756105, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 23, total # iters: 22)
+--------------------------------------
+Epoch 23 train errors: {'Seg_Loss': 0.8374416719783436}
+Epoch 23 validation errors: {'Seg_Loss': 0.8183610269001552, 'Overall_Acc': 0.7247357177734374, 'Mean_IOU': 0.1864436139259711, 'Class_0': 0.8279389824186053, 'Class_1': 0.02610374185522752, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 23 test errors: {'Seg_Loss': 0.8296995295418633, 'Overall_Acc': 0.6691688368055556, 'Mean_IOU': 0.1724766569302224, 'Class_0': 0.7802955375777351, 'Class_1': 0.030955836073391967, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 24, total # iters: 22)
+--------------------------------------
+Epoch 24 train errors: {'Seg_Loss': 0.8340970304879275}
+Epoch 24 validation errors: {'Seg_Loss': 0.8094596096447536, 'Overall_Acc': 0.7866671607607886, 'Mean_IOU': 0.20070497564522674, 'Class_0': 0.8738436017717633, 'Class_1': 0.018930911454455263, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 24 test errors: {'Seg_Loss': 0.8178366952472262, 'Overall_Acc': 0.7416152841073496, 'Mean_IOU': 0.18926474834412751, 'Class_0': 0.8390870756573148, 'Class_1': 0.023544108365765877, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 25, total # iters: 22)
+--------------------------------------
+Epoch 25 train errors: {'Seg_Loss': 0.8315630473873832}
+Epoch 25 validation errors: {'Seg_Loss': 0.8179048555237907, 'Overall_Acc': 0.7183342052641369, 'Mean_IOU': 0.18498232558451225, 'Class_0': 0.8230652723993573, 'Class_1': 0.027075997412404313, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 25 test errors: {'Seg_Loss': 0.8295284178521898, 'Overall_Acc': 0.6616783989800348, 'Mean_IOU': 0.17061410518960818, 'Class_0': 0.7742298311657376, 'Class_1': 0.03056540174616708, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 25
+current learning rate = 0.0001000
+(epoch: 26, total # iters: 22)
+--------------------------------------
+Epoch 26 train errors: {'Seg_Loss': 0.830518362197009}
+Epoch 26 validation errors: {'Seg_Loss': 0.810846039227077, 'Overall_Acc': 0.7610973539806548, 'Mean_IOU': 0.19503545099465244, 'Class_0': 0.8555413058825901, 'Class_1': 0.022754148605080054, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 26 test errors: {'Seg_Loss': 0.820817252000173, 'Overall_Acc': 0.7087655752676506, 'Mean_IOU': 0.18201372283536688, 'Class_0': 0.8131401406394111, 'Class_1': 0.02852421603165567, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 27, total # iters: 22)
+--------------------------------------
+Epoch 27 train errors: {'Seg_Loss': 0.8301685398275201}
+Epoch 27 validation errors: {'Seg_Loss': 0.8159071803092957, 'Overall_Acc': 0.7188429768880208, 'Mean_IOU': 0.18540176993020308, 'Class_0': 0.8238722681999207, 'Class_1': 0.029357291824583496, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 27 test errors: {'Seg_Loss': 0.8284439576996697, 'Overall_Acc': 0.6595936867042823, 'Mean_IOU': 0.1699760512780376, 'Class_0': 0.7721373902426826, 'Class_1': 0.030628515148742333, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 28, total # iters: 22)
+--------------------------------------
+Epoch 28 train errors: {'Seg_Loss': 0.8289294947277416}
+Epoch 28 validation errors: {'Seg_Loss': 0.8039435233388629, 'Overall_Acc': 0.7947541155133928, 'Mean_IOU': 0.20228768197105979, 'Class_0': 0.8789031079837254, 'Class_1': 0.016147090256189194, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 28 test errors: {'Seg_Loss': 0.8121281464894613, 'Overall_Acc': 0.7527288818359376, 'Mean_IOU': 0.19202998372284613, 'Class_0': 0.8462125062942505, 'Class_1': 0.023035827597292762, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 29, total # iters: 22)
+--------------------------------------
+Epoch 29 train errors: {'Seg_Loss': 0.8260826820676977}
+Epoch 29 validation errors: {'Seg_Loss': 0.8080771906035287, 'Overall_Acc': 0.7633324614025297, 'Mean_IOU': 0.1955648405013616, 'Class_0': 0.8564369848796299, 'Class_1': 0.022234790846206515, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 29 test errors: {'Seg_Loss': 0.8182425565189786, 'Overall_Acc': 0.7134922281901042, 'Mean_IOU': 0.1830014774179455, 'Class_0': 0.8160941004753113, 'Class_1': 0.02720053183535735, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 30, total # iters: 22)
+--------------------------------------
+Epoch 30 train errors: {'Seg_Loss': 0.8244325491515073}
+Epoch 30 validation errors: {'Seg_Loss': 0.8140632084437779, 'Overall_Acc': 0.7293637230282738, 'Mean_IOU': 0.18779977530518482, 'Class_0': 0.8318404725619725, 'Class_1': 0.028004075134439126, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 30 test errors: {'Seg_Loss': 0.8257574770185683, 'Overall_Acc': 0.6716623263888889, 'Mean_IOU': 0.17274440683452597, 'Class_0': 0.7822073830498589, 'Class_1': 0.028917268875779376, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 30
+current learning rate = 0.0001000
+(epoch: 31, total # iters: 22)
+--------------------------------------
+Epoch 31 train errors: {'Seg_Loss': 0.8251445699821819}
+Epoch 31 validation errors: {'Seg_Loss': 0.8039916753768921, 'Overall_Acc': 0.7688410586402529, 'Mean_IOU': 0.19685736559681688, 'Class_0': 0.8600158861705235, 'Class_1': 0.02184499583901405, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 31 test errors: {'Seg_Loss': 0.8138016197416518, 'Overall_Acc': 0.7232582600911459, 'Mean_IOU': 0.18532997158523057, 'Class_0': 0.8229237861103482, 'Class_1': 0.026706705038021836, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 32, total # iters: 22)
+--------------------------------------
+Epoch 32 train errors: {'Seg_Loss': 0.8224756473844702}
+Epoch 32 validation errors: {'Seg_Loss': 0.7984928573880877, 'Overall_Acc': 0.8098170689174108, 'Mean_IOU': 0.20582709730496776, 'Class_0': 0.8892835889543805, 'Class_1': 0.015209295720394169, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 32 test errors: {'Seg_Loss': 0.8059390121036105, 'Overall_Acc': 0.7728401466652199, 'Mean_IOU': 0.1967861193190309, 'Class_0': 0.8614887793858846, 'Class_1': 0.021257640066323802, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 33, total # iters: 22)
+--------------------------------------
+Epoch 33 train errors: {'Seg_Loss': 0.8216927132823251}
+Epoch 33 validation errors: {'Seg_Loss': 0.8056487185614449, 'Overall_Acc': 0.7618003336588541, 'Mean_IOU': 0.19499669542880596, 'Class_0': 0.8549277526991708, 'Class_1': 0.021041299983543076, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 33 test errors: {'Seg_Loss': 0.8160026868184408, 'Overall_Acc': 0.7118328631365741, 'Mean_IOU': 0.18245687253540133, 'Class_0': 0.8141940037409464, 'Class_1': 0.026276221569989704, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 34, total # iters: 22)
+--------------------------------------
+Epoch 34 train errors: {'Seg_Loss': 0.8207525204528462}
+Epoch 34 validation errors: {'Seg_Loss': 0.8081903968538556, 'Overall_Acc': 0.7380425444103423, 'Mean_IOU': 0.18999706485473064, 'Class_0': 0.8377520527158465, 'Class_1': 0.027413863389353667, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 34 test errors: {'Seg_Loss': 0.8201981584231058, 'Overall_Acc': 0.6828922526041666, 'Mean_IOU': 0.17561141669602934, 'Class_0': 0.7910486393504672, 'Class_1': 0.029070516479098134, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 35, total # iters: 22)
+--------------------------------------
+Epoch 35 train errors: {'Seg_Loss': 0.8183254572478208}
+Epoch 35 validation errors: {'Seg_Loss': 0.8002634644508362, 'Overall_Acc': 0.7920196242559524, 'Mean_IOU': 0.20203792846209032, 'Class_0': 0.8768544622829982, 'Class_1': 0.018349942775135526, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 35 test errors: {'Seg_Loss': 0.8087488810221354, 'Overall_Acc': 0.7494871238425925, 'Mean_IOU': 0.1913888288727698, 'Class_0': 0.8441787759462992, 'Class_1': 0.023799676753696986, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 35
+current learning rate = 0.0001000
+(epoch: 36, total # iters: 22)
+--------------------------------------
+Epoch 36 train errors: {'Seg_Loss': 0.8190912333401766}
+Epoch 36 validation errors: {'Seg_Loss': 0.8006478888647897, 'Overall_Acc': 0.7815013195219495, 'Mean_IOU': 0.19960660820892326, 'Class_0': 0.8690432395253863, 'Class_1': 0.019612656304161646, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 36 test errors: {'Seg_Loss': 0.8097293972969055, 'Overall_Acc': 0.7377892840350115, 'Mean_IOU': 0.18847718653051987, 'Class_0': 0.8341276248296102, 'Class_1': 0.023984113979774218, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 37, total # iters: 22)
+--------------------------------------
+Epoch 37 train errors: {'Seg_Loss': 0.8145360458980907}
+Epoch 37 validation errors: {'Seg_Loss': 0.8001226186752319, 'Overall_Acc': 0.7863442847842262, 'Mean_IOU': 0.20063763628649992, 'Class_0': 0.8726663759776524, 'Class_1': 0.018238360303387578, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 37 test errors: {'Seg_Loss': 0.8087891075346205, 'Overall_Acc': 0.7429471164279513, 'Mean_IOU': 0.18973162164014543, 'Class_0': 0.8388258351220025, 'Class_1': 0.023680913627483986, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 38, total # iters: 22)
+--------------------------------------
+Epoch 38 train errors: {'Seg_Loss': 0.8163339414379813}
+Epoch 38 validation errors: {'Seg_Loss': 0.802177906036377, 'Overall_Acc': 0.7661326090494791, 'Mean_IOU': 0.19639445135378977, 'Class_0': 0.8584855369159153, 'Class_1': 0.023090169357601553, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 38 test errors: {'Seg_Loss': 0.8126961059040494, 'Overall_Acc': 0.7154043240017361, 'Mean_IOU': 0.18321930564401986, 'Class_0': 0.8181824154324002, 'Class_1': 0.026198992479799524, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 39, total # iters: 22)
+--------------------------------------
+Epoch 39 train errors: {'Seg_Loss': 0.8157520104538311}
+Epoch 39 validation errors: {'Seg_Loss': 0.8101938111441476, 'Overall_Acc': 0.7180582391648065, 'Mean_IOU': 0.18527915319954893, 'Class_0': 0.8211516056741986, 'Class_1': 0.030247609613330236, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 39 test errors: {'Seg_Loss': 0.8233032491472032, 'Overall_Acc': 0.6604575602213542, 'Mean_IOU': 0.1698333483695519, 'Class_0': 0.7699922588136461, 'Class_1': 0.028426563522468012, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 40, total # iters: 22)
+--------------------------------------
+Epoch 40 train errors: {'Seg_Loss': 0.8131056698885831}
+Epoch 40 validation errors: {'Seg_Loss': 0.8025914260319301, 'Overall_Acc': 0.76557373046875, 'Mean_IOU': 0.1961293216117709, 'Class_0': 0.8576318025588989, 'Class_1': 0.022657137355833714, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 40 test errors: {'Seg_Loss': 0.8127131462097168, 'Overall_Acc': 0.7170613154658566, 'Mean_IOU': 0.18351643831307726, 'Class_0': 0.8183391160435147, 'Class_1': 0.025518065130907215, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 40
+current learning rate = 0.0001000
+(epoch: 41, total # iters: 22)
+--------------------------------------
+Epoch 41 train errors: {'Seg_Loss': 0.8139301159165122}
+Epoch 41 validation errors: {'Seg_Loss': 0.7971205030168805, 'Overall_Acc': 0.7947155471075149, 'Mean_IOU': 0.2027607199578964, 'Class_0': 0.8785810470581055, 'Class_1': 0.01876984824541848, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 41 test errors: {'Seg_Loss': 0.8053267399470011, 'Overall_Acc': 0.7547771764684607, 'Mean_IOU': 0.19244533333888547, 'Class_0': 0.8481328023804559, 'Class_1': 0.022554935601268273, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 42, total # iters: 22)
+--------------------------------------
+Epoch 42 train errors: {'Seg_Loss': 0.8129231821406971}
+Epoch 42 validation errors: {'Seg_Loss': 0.8002813288143703, 'Overall_Acc': 0.7720303199404761, 'Mean_IOU': 0.197574087368662, 'Class_0': 0.8621967009135655, 'Class_1': 0.021579695030076045, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 42 test errors: {'Seg_Loss': 0.8097560273276435, 'Overall_Acc': 0.726195859555845, 'Mean_IOU': 0.18579237755663355, 'Class_0': 0.8253126210636563, 'Class_1': 0.025004676957097318, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 43, total # iters: 22)
+--------------------------------------
+Epoch 43 train errors: {'Seg_Loss': 0.8100127469409596}
+Epoch 43 validation errors: {'Seg_Loss': 0.8006184697151184, 'Overall_Acc': 0.7662339564732142, 'Mean_IOU': 0.19653955016185126, 'Class_0': 0.8585306746619088, 'Class_1': 0.023892869278954874, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 43 test errors: {'Seg_Loss': 0.8109089268578423, 'Overall_Acc': 0.7167617232711225, 'Mean_IOU': 0.18358791210977926, 'Class_0': 0.819115612241957, 'Class_1': 0.026243543077725917, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 44, total # iters: 22)
+--------------------------------------
+Epoch 44 train errors: {'Seg_Loss': 0.8116730830886147}
+Epoch 44 validation errors: {'Seg_Loss': 0.7991532002176557, 'Overall_Acc': 0.7700852457682291, 'Mean_IOU': 0.19746602279185965, 'Class_0': 0.861461980002267, 'Class_1': 0.023438231250370985, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 44 test errors: {'Seg_Loss': 0.8097192049026489, 'Overall_Acc': 0.7205200873480903, 'Mean_IOU': 0.1846421079801867, 'Class_0': 0.8227265410953097, 'Class_1': 0.026449293305631727, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 45, total # iters: 22)
+--------------------------------------
+Epoch 45 train errors: {'Seg_Loss': 0.8091786314140667}
+Epoch 45 validation errors: {'Seg_Loss': 0.7924738526344299, 'Overall_Acc': 0.8231579008556549, 'Mean_IOU': 0.20930384751628042, 'Class_0': 0.8983020612171718, 'Class_1': 0.01635232295042702, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 45 test errors: {'Seg_Loss': 0.7989663547939725, 'Overall_Acc': 0.7901292136863424, 'Mean_IOU': 0.20093587653207845, 'Class_0': 0.8743455410003662, 'Class_1': 0.019845161127806123, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 45
+current learning rate = 0.0001000
+(epoch: 46, total # iters: 22)
+--------------------------------------
+Epoch 46 train errors: {'Seg_Loss': 0.8105609091845426}
+Epoch 46 validation errors: {'Seg_Loss': 0.7965854236057827, 'Overall_Acc': 0.7840937151227678, 'Mean_IOU': 0.20036149778075682, 'Class_0': 0.8707896726472037, 'Class_1': 0.019905766523996653, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 46 test errors: {'Seg_Loss': 0.8056085771984525, 'Overall_Acc': 0.7410933430989582, 'Mean_IOU': 0.1891416742439117, 'Class_0': 0.8372097743882073, 'Class_1': 0.023060335375096958, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 47, total # iters: 22)
+--------------------------------------
+Epoch 47 train errors: {'Seg_Loss': 0.8092637793584303}
+Epoch 47 validation errors: {'Seg_Loss': 0.7939220155988421, 'Overall_Acc': 0.8001435198102679, 'Mean_IOU': 0.20403741805900052, 'Class_0': 0.8820886015892029, 'Class_1': 0.018160633643024733, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 47 test errors: {'Seg_Loss': 0.8017275929450989, 'Overall_Acc': 0.762631361219618, 'Mean_IOU': 0.1943872379577594, 'Class_0': 0.8534869021839566, 'Class_1': 0.021896350267626177, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 48, total # iters: 22)
+--------------------------------------
+Epoch 48 train errors: {'Seg_Loss': 0.8090425838123668}
+Epoch 48 validation errors: {'Seg_Loss': 0.798363881451743, 'Overall_Acc': 0.7656317719959077, 'Mean_IOU': 0.19616237768976252, 'Class_0': 0.8568973115512303, 'Class_1': 0.022734983433955285, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 48 test errors: {'Seg_Loss': 0.8086563216315376, 'Overall_Acc': 0.7190995732060185, 'Mean_IOU': 0.18383343204218403, 'Class_0': 0.8187520172860887, 'Class_1': 0.023844310108365283, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 49, total # iters: 22)
+--------------------------------------
+Epoch 49 train errors: {'Seg_Loss': 0.8070151182738218}
+Epoch 49 validation errors: {'Seg_Loss': 0.7920532822608948, 'Overall_Acc': 0.8082392519996279, 'Mean_IOU': 0.20578890975119693, 'Class_0': 0.8879195536885943, 'Class_1': 0.01684526726603508, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 49 test errors: {'Seg_Loss': 0.7995094259579977, 'Overall_Acc': 0.7723690004701967, 'Mean_IOU': 0.19668204768085754, 'Class_0': 0.8610474665959676, 'Class_1': 0.02087174707169955, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 50, total # iters: 22)
+--------------------------------------
+Epoch 50 train errors: {'Seg_Loss': 0.807132666761225}
+Epoch 50 validation errors: {'Seg_Loss': 0.7988445588520595, 'Overall_Acc': 0.7613936941964285, 'Mean_IOU': 0.19532334236174914, 'Class_0': 0.8539621574538094, 'Class_1': 0.024719986069872642, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 50 test errors: {'Seg_Loss': 0.8090730375713773, 'Overall_Acc': 0.7146269169560185, 'Mean_IOU': 0.18276952726562423, 'Class_0': 0.8151155577765571, 'Class_1': 0.024783459097509168, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 50
+current learning rate = 0.0001000
+(epoch: 51, total # iters: 22)
+--------------------------------------
+Epoch 51 train errors: {'Seg_Loss': 0.805905743078752}
+Epoch 51 validation errors: {'Seg_Loss': 0.8026613422802517, 'Overall_Acc': 0.7436352248418899, 'Mean_IOU': 0.19119942169241402, 'Class_0': 0.8408750891685486, 'Class_1': 0.026227268288494088, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 51 test errors: {'Seg_Loss': 0.8143637577692667, 'Overall_Acc': 0.6901612458405672, 'Mean_IOU': 0.17690734779785305, 'Class_0': 0.7955435911814371, 'Class_1': 0.02577986720845931, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 52, total # iters: 22)
+--------------------------------------
+Epoch 52 train errors: {'Seg_Loss': 0.8051249926740472}
+Epoch 52 validation errors: {'Seg_Loss': 0.7980638316699437, 'Overall_Acc': 0.7627503313337053, 'Mean_IOU': 0.19575085534618034, 'Class_0': 0.8552963563374111, 'Class_1': 0.024122526659734182, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 52 test errors: {'Seg_Loss': 0.8086787197324965, 'Overall_Acc': 0.7139349365234374, 'Mean_IOU': 0.18281890030554393, 'Class_0': 0.8158857358826531, 'Class_1': 0.025237962399842218, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 53, total # iters: 22)
+--------------------------------------
+Epoch 53 train errors: {'Seg_Loss': 0.8062500655651093}
+Epoch 53 validation errors: {'Seg_Loss': 0.7923162153788975, 'Overall_Acc': 0.8026466296968006, 'Mean_IOU': 0.20466780108877705, 'Class_0': 0.883814241204943, 'Class_1': 0.018209092784672976, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 53 test errors: {'Seg_Loss': 0.7999543481402926, 'Overall_Acc': 0.7654394757306133, 'Mean_IOU': 0.19504058269864766, 'Class_0': 0.8558299342791239, 'Class_1': 0.021464161215893302, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 54, total # iters: 22)
+--------------------------------------
+Epoch 54 train errors: {'Seg_Loss': 0.8037110729651018}
+Epoch 54 validation errors: {'Seg_Loss': 0.7936175721032279, 'Overall_Acc': 0.7927960786365328, 'Mean_IOU': 0.2025454407202231, 'Class_0': 0.8769274183682033, 'Class_1': 0.0200716973296429, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 54 test errors: {'Seg_Loss': 0.8020495639906989, 'Overall_Acc': 0.7519732892071759, 'Mean_IOU': 0.1917966207340309, 'Class_0': 0.8460532625516256, 'Class_1': 0.0225871173121656, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 55, total # iters: 22)
+--------------------------------------
+Epoch 55 train errors: {'Seg_Loss': 0.8026487339626659}
+Epoch 55 validation errors: {'Seg_Loss': 0.7935808556420463, 'Overall_Acc': 0.7897133091517857, 'Mean_IOU': 0.201973369116917, 'Class_0': 0.8748039603233337, 'Class_1': 0.021019231182565688, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 55 test errors: {'Seg_Loss': 0.8023115396499634, 'Overall_Acc': 0.748276050708912, 'Mean_IOU': 0.19103570504282363, 'Class_0': 0.843306925561693, 'Class_1': 0.023430659854663343, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 55
+current learning rate = 0.0001000
+(epoch: 56, total # iters: 22)
+--------------------------------------
+Epoch 56 train errors: {'Seg_Loss': 0.8033408929001201}
+Epoch 56 validation errors: {'Seg_Loss': 0.7997600351061139, 'Overall_Acc': 0.7493547130766369, 'Mean_IOU': 0.19280776374681294, 'Class_0': 0.8458914245877948, 'Class_1': 0.026651044557053995, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 56 test errors: {'Seg_Loss': 0.8117466767628988, 'Overall_Acc': 0.6951688187210648, 'Mean_IOU': 0.1782638547401464, 'Class_0': 0.8015432688925002, 'Class_1': 0.026250331869555846, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 57, total # iters: 22)
+--------------------------------------
+Epoch 57 train errors: {'Seg_Loss': 0.8020633431998166}
+Epoch 57 validation errors: {'Seg_Loss': 0.7951535837990897, 'Overall_Acc': 0.7792289225260415, 'Mean_IOU': 0.19942132743794808, 'Class_0': 0.8674757650920323, 'Class_1': 0.02120752419744219, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 57 test errors: {'Seg_Loss': 0.804554111427731, 'Overall_Acc': 0.7339052553530093, 'Mean_IOU': 0.18769860277099357, 'Class_0': 0.8324956032964919, 'Class_1': 0.024752147828419564, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 58, total # iters: 22)
+--------------------------------------
+Epoch 58 train errors: {'Seg_Loss': 0.8036530586806211}
+Epoch 58 validation errors: {'Seg_Loss': 0.7894744021551949, 'Overall_Acc': 0.8030859375, 'Mean_IOU': 0.204849388518667, 'Class_0': 0.8840044396264213, 'Class_1': 0.01849112834315747, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 58 test errors: {'Seg_Loss': 0.7975229819615682, 'Overall_Acc': 0.7650195312499999, 'Mean_IOU': 0.1950711805290875, 'Class_0': 0.8553489380412631, 'Class_1': 0.02231034379090286, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 59, total # iters: 22)
+--------------------------------------
+Epoch 59 train errors: {'Seg_Loss': 0.802324956113642}
+Epoch 59 validation errors: {'Seg_Loss': 0.7968618699482509, 'Overall_Acc': 0.7631337774367559, 'Mean_IOU': 0.19568074609823666, 'Class_0': 0.8551270025117057, 'Class_1': 0.023270330426904757, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 59 test errors: {'Seg_Loss': 0.8070484863387214, 'Overall_Acc': 0.7173753074363425, 'Mean_IOU': 0.18344331833040922, 'Class_0': 0.8178224828508165, 'Class_1': 0.024010506975981925, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 60, total # iters: 22)
+--------------------------------------
+Epoch 60 train errors: {'Seg_Loss': 0.8004152016206221}
+Epoch 60 validation errors: {'Seg_Loss': 0.7884595394134521, 'Overall_Acc': 0.8147422281901041, 'Mean_IOU': 0.20741624149752283, 'Class_0': 0.8922556127820697, 'Class_1': 0.01698010739138616, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 60 test errors: {'Seg_Loss': 0.7953625188933479, 'Overall_Acc': 0.7807604076244213, 'Mean_IOU': 0.19880735792902138, 'Class_0': 0.867288609345754, 'Class_1': 0.02102211257766208, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 60
+current learning rate = 0.0001000
+(epoch: 61, total # iters: 22)
+--------------------------------------
+Epoch 61 train errors: {'Seg_Loss': 0.8002793382514607}
+Epoch 61 validation errors: {'Seg_Loss': 0.7945053151675633, 'Overall_Acc': 0.7725076729910716, 'Mean_IOU': 0.19808011314349652, 'Class_0': 0.8626307930265155, 'Class_1': 0.023583915949399983, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 61 test errors: {'Seg_Loss': 0.8046158485942416, 'Overall_Acc': 0.7258808955439815, 'Mean_IOU': 0.18568269188090655, 'Class_0': 0.8260277311007181, 'Class_1': 0.024770623810278874, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 62, total # iters: 22)
+--------------------------------------
+Epoch 62 train errors: {'Seg_Loss': 0.8006699572909962}
+Epoch 62 validation errors: {'Seg_Loss': 0.7925531353269305, 'Overall_Acc': 0.7797076997302826, 'Mean_IOU': 0.19960563459614414, 'Class_0': 0.8672023245266506, 'Class_1': 0.021365795617124865, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 62 test errors: {'Seg_Loss': 0.8017775747511122, 'Overall_Acc': 0.7378532353153936, 'Mean_IOU': 0.18854857415859336, 'Class_0': 0.834054622385237, 'Class_1': 0.02344757315262945, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 63, total # iters: 22)
+--------------------------------------
+Epoch 63 train errors: {'Seg_Loss': 0.7995642423629761}
+Epoch 63 validation errors: {'Seg_Loss': 0.7867986219269889, 'Overall_Acc': 0.8192068336123512, 'Mean_IOU': 0.2085299117052785, 'Class_0': 0.8950151971408299, 'Class_1': 0.016976398299448192, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 63 test errors: {'Seg_Loss': 0.7935155166520013, 'Overall_Acc': 0.7874631076388889, 'Mean_IOU': 0.20037087634691417, 'Class_0': 0.8714632060792711, 'Class_1': 0.02013016608624538, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 64, total # iters: 22)
+--------------------------------------
+Epoch 64 train errors: {'Seg_Loss': 0.7999172237786379}
+Epoch 64 validation errors: {'Seg_Loss': 0.7850560801369804, 'Overall_Acc': 0.8313395182291666, 'Mean_IOU': 0.21090075562134394, 'Class_0': 0.9031606486865452, 'Class_1': 0.014131469240445378, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 64 test errors: {'Seg_Loss': 0.7909144030676948, 'Overall_Acc': 0.802942211009838, 'Mean_IOU': 0.20369258241590427, 'Class_0': 0.8824902574221293, 'Class_1': 0.017064313062292058, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 65, total # iters: 22)
+--------------------------------------
+Epoch 65 train errors: {'Seg_Loss': 0.7994052117521112}
+Epoch 65 validation errors: {'Seg_Loss': 0.7879646079880851, 'Overall_Acc': 0.8119312104724702, 'Mean_IOU': 0.20684767196278062, 'Class_0': 0.8898549931389945, 'Class_1': 0.01760493519915534, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 65 test errors: {'Seg_Loss': 0.7949414650599161, 'Overall_Acc': 0.7786112241391782, 'Mean_IOU': 0.19808739605835293, 'Class_0': 0.8646892640325758, 'Class_1': 0.019907858738507558, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 65
+current learning rate = 0.0001000
+(epoch: 66, total # iters: 22)
+--------------------------------------
+Epoch 66 train errors: {'Seg_Loss': 0.7993754013018175}
+Epoch 66 validation errors: {'Seg_Loss': 0.7879055142402649, 'Overall_Acc': 0.8136413864862352, 'Mean_IOU': 0.20712649628398408, 'Class_0': 0.891167666230883, 'Class_1': 0.017041251861623356, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 66 test errors: {'Seg_Loss': 0.7946496605873108, 'Overall_Acc': 0.7808760805483216, 'Mean_IOU': 0.19863526396363054, 'Class_0': 0.8669449355867174, 'Class_1': 0.019928338536475267, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 67, total # iters: 22)
+--------------------------------------
+Epoch 67 train errors: {'Seg_Loss': 0.7977239977229725}
+Epoch 67 validation errors: {'Seg_Loss': 0.7889657872063773, 'Overall_Acc': 0.8052614339192709, 'Mean_IOU': 0.20530614847370635, 'Class_0': 0.8854730980736869, 'Class_1': 0.018252865810479437, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 67 test errors: {'Seg_Loss': 0.7961880962053934, 'Overall_Acc': 0.7702593315972222, 'Mean_IOU': 0.19624964198127126, 'Class_0': 0.8593422836727567, 'Class_1': 0.021274805864474427, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 68, total # iters: 22)
+--------------------------------------
+Epoch 68 train errors: {'Seg_Loss': 0.7974862347949635}
+Epoch 68 validation errors: {'Seg_Loss': 0.7856140732765198, 'Overall_Acc': 0.8222755359468005, 'Mean_IOU': 0.20902150386787646, 'Class_0': 0.8970462679862976, 'Class_1': 0.015846210099490627, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 68 test errors: {'Seg_Loss': 0.7917716105779012, 'Overall_Acc': 0.7918517388237846, 'Mean_IOU': 0.20117917928253926, 'Class_0': 0.8746528294351366, 'Class_1': 0.018558232975515745, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 69, total # iters: 22)
+--------------------------------------
+Epoch 69 train errors: {'Seg_Loss': 0.7973122488368641}
+Epoch 69 validation errors: {'Seg_Loss': 0.7887136595589774, 'Overall_Acc': 0.8025055512927829, 'Mean_IOU': 0.2047521962511309, 'Class_0': 0.8834855471338544, 'Class_1': 0.01899003964250109, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 69 test errors: {'Seg_Loss': 0.7961851093504164, 'Overall_Acc': 0.7667723479094329, 'Mean_IOU': 0.19535674553896396, 'Class_0': 0.8566982613669502, 'Class_1': 0.021335490222554654, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 70, total # iters: 22)
+--------------------------------------
+Epoch 70 train errors: {'Seg_Loss': 0.796082545410503}
+Epoch 70 validation errors: {'Seg_Loss': 0.7885318909372602, 'Overall_Acc': 0.801405000232515, 'Mean_IOU': 0.20461639088090064, 'Class_0': 0.8828993609973362, 'Class_1': 0.019573919508340105, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 70 test errors: {'Seg_Loss': 0.7961841821670532, 'Overall_Acc': 0.7641300003616897, 'Mean_IOU': 0.19495545866699468, 'Class_0': 0.8551515870624118, 'Class_1': 0.022910194917737197, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 70
+current learning rate = 0.0001000
+(epoch: 71, total # iters: 22)
+--------------------------------------
+Epoch 71 train errors: {'Seg_Loss': 0.7965785264968872}
+Epoch 71 validation errors: {'Seg_Loss': 0.7968042748314994, 'Overall_Acc': 0.751016613188244, 'Mean_IOU': 0.19310218292762876, 'Class_0': 0.8465325236320496, 'Class_1': 0.02645842082399343, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 71 test errors: {'Seg_Loss': 0.8075676096810235, 'Overall_Acc': 0.7019672082971643, 'Mean_IOU': 0.1800577113956737, 'Class_0': 0.8060845534006754, 'Class_1': 0.026790607306692336, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 72, total # iters: 22)
+--------------------------------------
+Epoch 72 train errors: {'Seg_Loss': 0.7960852032357996}
+Epoch 72 validation errors: {'Seg_Loss': 0.7894655466079712, 'Overall_Acc': 0.7920358131045386, 'Mean_IOU': 0.20250783259549365, 'Class_0': 0.8762609447751727, 'Class_1': 0.020820114728329436, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 72 test errors: {'Seg_Loss': 0.7978260517120361, 'Overall_Acc': 0.7518978316695601, 'Mean_IOU': 0.19194887709395475, 'Class_0': 0.8459150989850363, 'Class_1': 0.023329073276424122, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 73, total # iters: 22)
+--------------------------------------
+Epoch 73 train errors: {'Seg_Loss': 0.7949707724831321}
+Epoch 73 validation errors: {'Seg_Loss': 0.7935671636036464, 'Overall_Acc': 0.7663574509393601, 'Mean_IOU': 0.1967567865080029, 'Class_0': 0.857796141079494, 'Class_1': 0.024820065586287195, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 73 test errors: {'Seg_Loss': 0.8038093050320944, 'Overall_Acc': 0.7195866789641203, 'Mean_IOU': 0.18415637574765956, 'Class_0': 0.8204395042525398, 'Class_1': 0.02466698804508067, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 74, total # iters: 22)
+--------------------------------------
+Epoch 74 train errors: {'Seg_Loss': 0.7958742705258456}
+Epoch 74 validation errors: {'Seg_Loss': 0.7899803519248962, 'Overall_Acc': 0.7899551536923364, 'Mean_IOU': 0.20205542420158665, 'Class_0': 0.8747043269021171, 'Class_1': 0.02112844223821802, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 74 test errors: {'Seg_Loss': 0.7985414597723219, 'Overall_Acc': 0.7490387641059028, 'Mean_IOU': 0.19113561196985204, 'Class_0': 0.8436895343992445, 'Class_1': 0.022830617872791156, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 75, total # iters: 22)
+--------------------------------------
+Epoch 75 train errors: {'Seg_Loss': 0.7939567918127234}
+Epoch 75 validation errors: {'Seg_Loss': 0.7886632340294975, 'Overall_Acc': 0.801093488420759, 'Mean_IOU': 0.20451777166139462, 'Class_0': 0.8829152754374913, 'Class_1': 0.01961782414998327, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 75 test errors: {'Seg_Loss': 0.7964353826310899, 'Overall_Acc': 0.762046169704861, 'Mean_IOU': 0.19435470088830092, 'Class_0': 0.854207091861301, 'Class_1': 0.022710153703681298, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 75
+current learning rate = 0.0001000
+(epoch: 76, total # iters: 22)
+--------------------------------------
+Epoch 76 train errors: {'Seg_Loss': 0.7938014458526265}
+Epoch 76 validation errors: {'Seg_Loss': 0.7896823968206134, 'Overall_Acc': 0.7927716645740329, 'Mean_IOU': 0.20268490935396377, 'Class_0': 0.8767981103488377, 'Class_1': 0.02056654407975397, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 76 test errors: {'Seg_Loss': 0.7978727089034187, 'Overall_Acc': 0.7541122323495371, 'Mean_IOU': 0.19252280261326715, 'Class_0': 0.8475301927990384, 'Class_1': 0.023006473948852444, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 77, total # iters: 22)
+--------------------------------------
+Epoch 77 train errors: {'Seg_Loss': 0.7929010960188779}
+Epoch 77 validation errors: {'Seg_Loss': 0.7917935933385577, 'Overall_Acc': 0.7807729375930059, 'Mean_IOU': 0.19995642330303806, 'Class_0': 0.8685854417937142, 'Class_1': 0.022256339040073465, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 77 test errors: {'Seg_Loss': 0.80084185467826, 'Overall_Acc': 0.7377768735532407, 'Mean_IOU': 0.1884859460134034, 'Class_0': 0.8355652093887329, 'Class_1': 0.02366768746610938, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 78, total # iters: 22)
+--------------------------------------
+Epoch 78 train errors: {'Seg_Loss': 0.7949372475797479}
+Epoch 78 validation errors: {'Seg_Loss': 0.791018009185791, 'Overall_Acc': 0.7803887067522322, 'Mean_IOU': 0.19979844246461384, 'Class_0': 0.8680071745600019, 'Class_1': 0.022070575771587237, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 78 test errors: {'Seg_Loss': 0.7999433477719625, 'Overall_Acc': 0.7381163194444444, 'Mean_IOU': 0.18852576866597848, 'Class_0': 0.8354065484470792, 'Class_1': 0.023628319082490634, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 79, total # iters: 22)
+--------------------------------------
+Epoch 79 train errors: {'Seg_Loss': 0.7934552349827506}
+Epoch 79 validation errors: {'Seg_Loss': 0.7898262654032026, 'Overall_Acc': 0.782413824172247, 'Mean_IOU': 0.20055488423220494, 'Class_0': 0.8693885547774178, 'Class_1': 0.02337080373295716, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 79 test errors: {'Seg_Loss': 0.7990924914677938, 'Overall_Acc': 0.7383117449725115, 'Mean_IOU': 0.188573110031538, 'Class_0': 0.8357043663660685, 'Class_1': 0.023887239268434415, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 80, total # iters: 22)
+--------------------------------------
+Epoch 80 train errors: {'Seg_Loss': 0.7945000393824144}
+Epoch 80 validation errors: {'Seg_Loss': 0.7873694896697998, 'Overall_Acc': 0.7971121942429316, 'Mean_IOU': 0.20376389000626838, 'Class_0': 0.8795854449272156, 'Class_1': 0.020732799461776658, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 80 test errors: {'Seg_Loss': 0.7952827678786384, 'Overall_Acc': 0.7602438015407986, 'Mean_IOU': 0.19389366521478874, 'Class_0': 0.8516133162710402, 'Class_1': 0.022300303253966074, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 80
+current learning rate = 0.0001000
+(epoch: 81, total # iters: 22)
+--------------------------------------
+Epoch 81 train errors: {'Seg_Loss': 0.7921381728215651}
+Epoch 81 validation errors: {'Seg_Loss': 0.7871507491384234, 'Overall_Acc': 0.8043563116164434, 'Mean_IOU': 0.20539579214407963, 'Class_0': 0.8852440629686628, 'Class_1': 0.019804195101772035, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 81 test errors: {'Seg_Loss': 0.7945098545816209, 'Overall_Acc': 0.7667145001446759, 'Mean_IOU': 0.1956407166762742, 'Class_0': 0.8577661448054843, 'Class_1': 0.02291786818144222, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 82, total # iters: 22)
+--------------------------------------
+Epoch 82 train errors: {'Seg_Loss': 0.7915179268880324}
+Epoch 82 validation errors: {'Seg_Loss': 0.7858239582606724, 'Overall_Acc': 0.8137822323753721, 'Mean_IOU': 0.20742094891751242, 'Class_0': 0.8914339116641453, 'Class_1': 0.01836624665052763, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 82 test errors: {'Seg_Loss': 0.7924737930297852, 'Overall_Acc': 0.7807028537326387, 'Mean_IOU': 0.1987295230340541, 'Class_0': 0.8673129081726074, 'Class_1': 0.020595030231763505, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 83, total # iters: 22)
+--------------------------------------
+Epoch 83 train errors: {'Seg_Loss': 0.7918480770154432}
+Epoch 83 validation errors: {'Seg_Loss': 0.7829490729740688, 'Overall_Acc': 0.8276291910807292, 'Mean_IOU': 0.2106078033488921, 'Class_0': 0.9006405813353402, 'Class_1': 0.017206043535095108, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 83 test errors: {'Seg_Loss': 0.7886321875784132, 'Overall_Acc': 0.7993790916160299, 'Mean_IOU': 0.20324467991129178, 'Class_0': 0.8802478313446045, 'Class_1': 0.01966043928081894, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 84, total # iters: 22)
+--------------------------------------
+Epoch 84 train errors: {'Seg_Loss': 0.789581992409446}
+Epoch 84 validation errors: {'Seg_Loss': 0.7902328457151141, 'Overall_Acc': 0.7779581996372766, 'Mean_IOU': 0.19929346476659845, 'Class_0': 0.8660416858536857, 'Class_1': 0.022516612030033554, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 84 test errors: {'Seg_Loss': 0.7991863290468851, 'Overall_Acc': 0.7359591561776622, 'Mean_IOU': 0.1880635500115833, 'Class_0': 0.8333114319377475, 'Class_1': 0.02376931976646625, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 85, total # iters: 22)
+--------------------------------------
+Epoch 85 train errors: {'Seg_Loss': 0.7911683835766532}
+Epoch 85 validation errors: {'Seg_Loss': 0.7871456486838204, 'Overall_Acc': 0.8019371977306546, 'Mean_IOU': 0.20474064832622188, 'Class_0': 0.8828824247632708, 'Class_1': 0.019699178519658744, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 85 test errors: {'Seg_Loss': 0.7945322063234117, 'Overall_Acc': 0.7669118245442709, 'Mean_IOU': 0.19539907765770914, 'Class_0': 0.8565115729967753, 'Class_1': 0.021353216883855768, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 85
+current learning rate = 0.0001000
+(epoch: 86, total # iters: 22)
+--------------------------------------
+Epoch 86 train errors: {'Seg_Loss': 0.7899430285800587}
+Epoch 86 validation errors: {'Seg_Loss': 0.7894501771245684, 'Overall_Acc': 0.7857844761439733, 'Mean_IOU': 0.20111936804184, 'Class_0': 0.8717604194368634, 'Class_1': 0.02171872043982148, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 86 test errors: {'Seg_Loss': 0.7980529202355279, 'Overall_Acc': 0.7449721950954862, 'Mean_IOU': 0.19020757850580455, 'Class_0': 0.8406998846266005, 'Class_1': 0.023236966869767964, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 87, total # iters: 22)
+--------------------------------------
+Epoch 87 train errors: {'Seg_Loss': 0.7909318398345601}
+Epoch 87 validation errors: {'Seg_Loss': 0.7848510486739022, 'Overall_Acc': 0.8111328996930804, 'Mean_IOU': 0.20703080684931166, 'Class_0': 0.88953868831907, 'Class_1': 0.019744880364409516, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 87 test errors: {'Seg_Loss': 0.7919107211960686, 'Overall_Acc': 0.7765974256727431, 'Mean_IOU': 0.1978153793233085, 'Class_0': 0.8643536435233222, 'Class_1': 0.02152555978197294, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 88, total # iters: 22)
+--------------------------------------
+Epoch 88 train errors: {'Seg_Loss': 0.7920721796425906}
+Epoch 88 validation errors: {'Seg_Loss': 0.780045177255358, 'Overall_Acc': 0.8418430292038691, 'Mean_IOU': 0.2136827641984893, 'Class_0': 0.9099042585917881, 'Class_1': 0.015140802599489689, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 88 test errors: {'Seg_Loss': 0.7851694226264954, 'Overall_Acc': 0.8166951045283564, 'Mean_IOU': 0.2070072577165766, 'Class_0': 0.89195140865114, 'Class_1': 0.016227359767071903, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 89, total # iters: 22)
+--------------------------------------
+Epoch 89 train errors: {'Seg_Loss': 0.7902245738289573}
+Epoch 89 validation errors: {'Seg_Loss': 0.7806061506271362, 'Overall_Acc': 0.8398261369977679, 'Mean_IOU': 0.2132991154356255, 'Class_0': 0.9086621659142631, 'Class_1': 0.01568729354871071, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 89 test errors: {'Seg_Loss': 0.7855797542466058, 'Overall_Acc': 0.8139768247251157, 'Mean_IOU': 0.2065075825390474, 'Class_0': 0.8902561333444383, 'Class_1': 0.01738928596306424, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 90, total # iters: 22)
+--------------------------------------
+Epoch 90 train errors: {'Seg_Loss': 0.7908477837389166}
+Epoch 90 validation errors: {'Seg_Loss': 0.7818135448864528, 'Overall_Acc': 0.8313352167038691, 'Mean_IOU': 0.2115056947776932, 'Class_0': 0.9028846110616412, 'Class_1': 0.017123833282052407, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 90 test errors: {'Seg_Loss': 0.7874204383956062, 'Overall_Acc': 0.8035679343894677, 'Mean_IOU': 0.2041020632517763, 'Class_0': 0.8826246327824063, 'Class_1': 0.01839944538207621, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 90
+current learning rate = 0.0001000
+(epoch: 91, total # iters: 22)
+--------------------------------------
+Epoch 91 train errors: {'Seg_Loss': 0.7893703850832853}
+Epoch 91 validation errors: {'Seg_Loss': 0.7783581614494324, 'Overall_Acc': 0.8572989327566966, 'Mean_IOU': 0.21708262393255445, 'Class_0': 0.9200361881937299, 'Class_1': 0.01329730890990634, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 91 test errors: {'Seg_Loss': 0.7825780974494086, 'Overall_Acc': 0.83384844744647, 'Mean_IOU': 0.21114549271197708, 'Class_0': 0.9038018385569254, 'Class_1': 0.015374880330808891, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 92, total # iters: 22)
+--------------------------------------
+Epoch 92 train errors: {'Seg_Loss': 0.7879818406972018}
+Epoch 92 validation errors: {'Seg_Loss': 0.7831558500017438, 'Overall_Acc': 0.8270991734095982, 'Mean_IOU': 0.21059733167028846, 'Class_0': 0.900586119719914, 'Class_1': 0.017799908386742964, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 92 test errors: {'Seg_Loss': 0.7888874411582947, 'Overall_Acc': 0.7968849238642939, 'Mean_IOU': 0.20271350851107994, 'Class_0': 0.8791777955161201, 'Class_1': 0.020267086624193728, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 93, total # iters: 22)
+--------------------------------------
+Epoch 93 train errors: {'Seg_Loss': 0.790589614347978}
+Epoch 93 validation errors: {'Seg_Loss': 0.7922028388295855, 'Overall_Acc': 0.7596090552920387, 'Mean_IOU': 0.1953630632780299, 'Class_0': 0.8528800095830645, 'Class_1': 0.02722269477505636, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 93 test errors: {'Seg_Loss': 0.8026518887943692, 'Overall_Acc': 0.7120454915364582, 'Mean_IOU': 0.18250756837375112, 'Class_0': 0.8146674169434441, 'Class_1': 0.026726919019387826, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 94, total # iters: 22)
+--------------------------------------
+Epoch 94 train errors: {'Seg_Loss': 0.7882464040409435}
+Epoch 94 validation errors: {'Seg_Loss': 0.7904696379389081, 'Overall_Acc': 0.7733651878720238, 'Mean_IOU': 0.1982867386277673, 'Class_0': 0.8628770623888288, 'Class_1': 0.02394834626466036, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 94 test errors: {'Seg_Loss': 0.799789739979638, 'Overall_Acc': 0.7294291178385417, 'Mean_IOU': 0.18643544423498962, 'Class_0': 0.8285963733990988, 'Class_1': 0.02438122853830767, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 95, total # iters: 22)
+--------------------------------------
+Epoch 95 train errors: {'Seg_Loss': 0.788794755935669}
+Epoch 95 validation errors: {'Seg_Loss': 0.7902430891990662, 'Overall_Acc': 0.7717767624627976, 'Mean_IOU': 0.19800754533451656, 'Class_0': 0.8614519834518433, 'Class_1': 0.024151663895314153, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 95 test errors: {'Seg_Loss': 0.799999992052714, 'Overall_Acc': 0.7266673674406829, 'Mean_IOU': 0.18577655912286054, 'Class_0': 0.8261760671933492, 'Class_1': 0.024303110523356333, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+Saving the model S at the end of epoch 95
+current learning rate = 0.0001000
+(epoch: 96, total # iters: 22)
+--------------------------------------
+Epoch 96 train errors: {'Seg_Loss': 0.7890700752084906}
+Epoch 96 validation errors: {'Seg_Loss': 0.7869105168751308, 'Overall_Acc': 0.7944205147879464, 'Mean_IOU': 0.20315906982870938, 'Class_0': 0.8777616790362767, 'Class_1': 0.02131607147332813, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 96 test errors: {'Seg_Loss': 0.7947272393438551, 'Overall_Acc': 0.7566102430555556, 'Mean_IOU': 0.1929790455599552, 'Class_0': 0.8494674762090048, 'Class_1': 0.022548652137629688, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 97, total # iters: 22)
+--------------------------------------
+Epoch 97 train errors: {'Seg_Loss': 0.789522571997209}
+Epoch 97 validation errors: {'Seg_Loss': 0.7800241538456508, 'Overall_Acc': 0.8372490873790923, 'Mean_IOU': 0.21275056906401354, 'Class_0': 0.9068026287215096, 'Class_1': 0.016335575907890285, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 97 test errors: {'Seg_Loss': 0.7850328352716234, 'Overall_Acc': 0.8120773654513889, 'Mean_IOU': 0.20595944057701787, 'Class_0': 0.8886962201860216, 'Class_1': 0.017064375983156625, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 98, total # iters: 22)
+--------------------------------------
+Epoch 98 train errors: {'Seg_Loss': 0.7875557975335554}
+Epoch 98 validation errors: {'Seg_Loss': 0.7824485727718898, 'Overall_Acc': 0.825936279296875, 'Mean_IOU': 0.21012459616623, 'Class_0': 0.8994597452027457, 'Class_1': 0.017102356368143643, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 98 test errors: {'Seg_Loss': 0.7881524430380927, 'Overall_Acc': 0.7971897379557291, 'Mean_IOU': 0.20246979193631326, 'Class_0': 0.8787999153137207, 'Class_1': 0.018608777078851644, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
+(epoch: 99, total # iters: 22)
+--------------------------------------
+Epoch 99 train errors: {'Seg_Loss': 0.7878567982803691}
+Epoch 99 validation errors: {'Seg_Loss': 0.7824454477855137, 'Overall_Acc': 0.8251104445684524, 'Mean_IOU': 0.21000649755088077, 'Class_0': 0.8990661331585476, 'Class_1': 0.017475629000858004, 'Class_2': 0.0, 'Class_3': 0.0}
+Epoch 99 test errors: {'Seg_Loss': 0.7882491151491801, 'Overall_Acc': 0.7956222421151621, 'Mean_IOU': 0.20224326142906413, 'Class_0': 0.8780602216720581, 'Class_1': 0.019603095686761662, 'Class_2': 0.0, 'Class_3': 0.0}
+--------------------------------------
+current learning rate = 0.0001000
