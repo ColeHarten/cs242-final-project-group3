@@ -23,8 +23,6 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)  # Early exit head
 
         self.thresholds = None  # Define thresholds for early exit
-
-        # Storage for layer outputs
         self.layer_outputs = {}  # Dictionary to store outputs for all layers
 
         # downsampling

@@ -26,6 +26,10 @@ class FeedForwardSegmentation(BaseModel):
         self.target = None
         self.tensor_dim = opts.tensor_dim
 
+        self.thresholds = None  # Define thresholds for early exit in attention unet for CT scans
+        self.layer_outputs = {} 
+
+
         # load/define networks
         self.net = get_network(opts.model_type, n_classes=opts.output_nc,
                                in_channels=opts.input_nc, nonlocal_mode=opts.nonlocal_mode,
@@ -139,6 +143,15 @@ class FeedForwardSegmentation(BaseModel):
     def get_feature_maps(self, layer_name, upscale):
         feature_extractor = HookBasedFeatureExtractor(self.net, layer_name, upscale)
         return feature_extractor.forward(Variable(self.input))
+    
+    # Set thresholds for CBT in attention unet for CT scans
+    def set_thresholds(self, thresholds_path):
+        try:
+            self.thresholds = torch.load(thresholds_path)
+            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
+        except Exception as e:
+            print(f"Error loading thresholds: {e}")
+            self.thresholds = None
 
     # returns the fp/bp times of the model
     def get_fp_bp_time (self, size=None):
