@@ -48,7 +48,7 @@ def train(arguments):
 
     # Visualisation Parameters
     # visualizer = Visualiser(json_opts.visualisation, save_dir=model.save_dir)
-    # error_logger = ErrorLogger()
+    error_logger = ErrorLogger()
 
     # Training Function
     model.set_scheduler(train_opts)
@@ -64,7 +64,7 @@ def train(arguments):
 
             # Error visualisation
             errors = model.get_current_errors()
-            # error_logger.update(errors, split='train')
+            error_logger.update(errors, split='train')
 
         # Validation and Testing Iterations
         for loader, split in zip([valid_loader, test_loader], ['validation', 'test']):
@@ -77,17 +77,23 @@ def train(arguments):
                 # Error visualisation
                 errors = model.get_current_errors()
                 stats = model.get_segmentation_stats()
-                # error_logger.update({**errors, **stats}, split=split)
+                error_logger.update({**errors, **stats}, split=split)
 
                 # Visualise predictions
                 # visuals = model.get_current_visuals()
                 # visualizer.display_current_results(visuals, epoch=epoch, save_result=False)
 
+        print("--------------------------------------")
+        for split in ['train', 'validation', 'test']:
+            epoch_errors = error_logger.get_errors(split)
+            print(f"Epoch {epoch} {split} errors: {epoch_errors}")
+        print("--------------------------------------")
+        
         # Update the plots
         # for split in ['train', 'validation', 'test']:
             # visualizer.plot_current_errors(epoch, error_logger.get_errors(split), split_name=split)
             # visualizer.print_current_errors(epoch, error_logger.get_errors(split), split_name=split)
-        # error_logger.reset()
+        error_logger.reset()
 
         # Save the model parameters
         if epoch % train_opts.save_epoch_freq == 0:

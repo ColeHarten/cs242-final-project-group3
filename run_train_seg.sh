@@ -1,26 +1,32 @@
 #!/bin/bash
-#SBATCH -c 4                # Number of CPU cores (-c)
-#SBATCH -t 1-12:59          # Runtime in D-HH:MM, minimum of 10 minutes
-#SBATCH --mem=99G           # Memory pool for all CPU cores
-#SBATCH --array=1-1         # number of jobs (job array)
-#SBATCH --gres=gpu:nvidia_a100-sxm4-80gb:1
-#SBATCH -p gpu_requeue
+#SBATCH -c 8                # Number of CPU cores
+#SBATCH -t 1-12:59          # Runtime
+#SBATCH --mem=99G           # Memory
+#SBATCH --gres=gpu:nvidia_a100-sxm4-80gb:4
+#SBATCH -p gpu
 #SBATCH -o train_%j.out
 #SBATCH -e train_%j.err 
 
-# Load software
-module load cuda/11.8.0-fasrc01
-module load cudnn/8.8.0.121_cuda12-fasrc01
-module load python/3.10.12-fasrc01
+#SBATCH --mail-type=ALL               
+#SBATCH --mail-user=charten@college.harvard.edu
 
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export NCCL_DEBUG=INFO
+export PYTHONFAULTHANDLER=1
 
 # Activate mamba env
-source ~/.bashrc
-source activate NNBP-OSD
+module load Mambaforge
+mamba activate myenv
+
+# Debug info
+echo "CUDA version:"
+nvcc --version
+echo "Python version:"
+python --version
+echo "Python path:"
+which python
 nvidia-smi
 
 # Run the Python scripts with the provided parameters
 echo "Setup done. Starting training..."
-
-python3 train_segmentation.py --config configs/config_unet_ct_multi_att_dsv.json
+python train_segmentation.py --config configs/config_unet_ct_multi_att_dsv.json

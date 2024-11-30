@@ -1,6 +1,6 @@
 import numpy as np
 from .util import csv_write
-
+import torch
 
 class BaseMeter(object):
     """Just a place holderb"""
