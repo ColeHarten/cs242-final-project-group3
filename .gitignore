@@ -4,6 +4,9 @@ __pycache__/
 *$py.class
 *.pyc
 
+torchsample/
+Pancreas-CT
+
 # Saved results
 checkpoints/
 checkpoints_2/
