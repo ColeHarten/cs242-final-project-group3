@@ -117,6 +117,17 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         # Early exit logic
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
             early_exit_logits = self.early_exit(up2)  # Predict segmentation logits
+
+            # Confidence and predicted classes
+            early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]
+            predicted_classes = torch.argmax(F.softmax(early_exit_logits, dim=1), dim=1)
+
+            # Create pixel mask based on class-specific thresholds
+            pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
+            for cls in range(len(self.thresholds)):
+                class_mask = (predicted_classes == cls)
+                pixel_mask[class_mask] = early_exit_confidence[class_mask] < self.thresholds[cls]
+
             early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]  # Compute pixel confidence
 
             # Generate mask for unconfident pixels
