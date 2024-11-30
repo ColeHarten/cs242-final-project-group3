@@ -6,13 +6,12 @@
 #SBATCH -p gpu_requeue
 #SBATCH -o train_%j.out
 #SBATCH -e train_%j.err 
+#SBATCH --exclude=holygpu8a31305,holygpu8a31402,holygpu8a31202,holygpu8a29106,holygpu8a25104
 
 # Load software
 module load cuda/11.8.0-fasrc01
 module load cudnn/8.8.0.121_cuda12-fasrc01
 module load Mambaforge
-
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 # Activate mamba env
 mamba activate myenv
