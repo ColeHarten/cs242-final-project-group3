@@ -19,7 +19,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         filters = [64, 128, 256, 512, 1024]
         filters = [int(x / self.feature_scale) for x in filters]
 
-        # downsampling
+        # downsampling–
         self.conv1 = UnetConv3(self.in_channels, filters[0], self.is_batchnorm, kernel_size=(3,3,3), padding_size=(1,1,1))
         self.maxpool1 = nn.MaxPool3d(kernel_size=(2, 2, 2))
 

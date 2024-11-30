@@ -4,7 +4,7 @@
 #SBATCH --mem=99G           # Memory pool for all CPU cores
 #SBATCH --array=1-1         # number of jobs (job array)
 #SBATCH --gres=gpu:nvidia_a100-sxm4-80gb:1
-#SBATCH -p gpu
+#SBATCH -p gpu_requeue
 #SBATCH -o train_%j.out
 #SBATCH -e train_%j.err 
 

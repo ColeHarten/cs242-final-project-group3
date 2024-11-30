@@ -20,6 +20,8 @@ def train(arguments):
     # Load options
     json_opts = json_file_to_pyobj(json_filename)
     train_opts = json_opts.training
+    
+    print(json_opts)
 
     # Architecture type
     arch_type = train_opts.arch_type
@@ -103,5 +105,7 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--config',  help='training config file', required=True)
     parser.add_argument('-d', '--debug',   help='returns number of parameters and bp/fp runtime', action='store_true')
     args = parser.parse_args()
-
+    
+    print("Setting up model...")
+    
     train(args)

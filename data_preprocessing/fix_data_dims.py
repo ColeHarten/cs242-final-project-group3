@@ -70,7 +70,7 @@ def preprocess_images_to_match_labels(root_dir, output_dir, image_prefix, label_
         suffix (str): Suffix for both filenames (default: '.nii').
     """
     # Splits and subdirectories
-    splits = ['validation']
+    splits = ['train']
 
     for split in splits:
         image_dir = os.path.join(root_dir, split, 'image')
@@ -82,19 +82,23 @@ def preprocess_images_to_match_labels(root_dir, output_dir, image_prefix, label_
         os.makedirs(output_image_dir, exist_ok=True)
         os.makedirs(output_label_dir, exist_ok=True)
 
+        already_there = os.listdir(f"{output_dir}/{split}/label")
+        
+        
         # Map labels by numeric ID
-        label_files = os.listdir(label_dir)
+        label_files = [f for f in os.listdir(label_dir) if f not in already_there]
         label_map = {
             get_numeric_id(label, label_prefix, suffix): os.path.join(label_dir, label)
             for label in label_files if label.startswith(label_prefix) and label.endswith(suffix)
         }
+        
 
         # Process each image file
         for file_name in os.listdir(image_dir):
             if file_name.startswith(image_prefix) and file_name.endswith(suffix):
                 image_id = get_numeric_id(file_name, image_prefix, suffix)
                 image_path = os.path.join(image_dir, file_name)
-
+                
                 # Match the image to its corresponding label
                 if image_id in label_map:
                     label_path = label_map[image_id]
