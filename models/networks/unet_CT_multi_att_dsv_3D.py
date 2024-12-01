@@ -19,8 +19,8 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         filters = [64, 128, 256, 512, 1024]
         filters = [int(x / self.feature_scale) for x in filters]
 
-        self.early_exit_layer_name = 'up_concat2'  # Dynamically associate the target layer
-        # self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)
+        self.early_exit_layer_name = 'up_concat2'
+        self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)
         self.early_exit_up4 = nn.Conv3d(filters[3], n_classes, kernel_size=1)
         self.early_exit_up3 = nn.Conv3d(filters[2], n_classes, kernel_size=1)
         self.early_exit_up2 = nn.Conv3d(filters[1], n_classes, kernel_size=1)
@@ -76,24 +76,12 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
             elif isinstance(m, nn.BatchNorm3d):
                 init_weights(m, init_type='kaiming')
 
-    def set_thresholds(self, thresholds_path):
-        try:
-            self.thresholds = torch.load(thresholds_path)
-            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
-        except Exception as e:
-            print(f"Error loading thresholds: {e}")
-            self.thresholds = None
-
     def forward(self, inputs):
-        # if self.thresholds is None:
-        #     raise ValueError("Thresholds have not been set. Load thresholds using set_thresholds().")
-        
         if self.thresholds is None:
-            # Fallback to default processing when thresholds are unavailable
-            print("Debug: Thresholds NOT set successfully; proceeding WITHOUT early exit.")
-            return self.regular_forward(inputs)
+            raise ValueError("Thresholds are None in forward method")
+            # return self.regular_forward(inputs)
         else:
-            print("Debug: Thresholds set successfully; proceeding WITH early exit.")
+            print(f"Debug: Thresholds in forward: {self.thresholds}. Proceeding with early exit...")
 
         # Encoder
         conv1 = self.conv1(inputs)
@@ -114,58 +102,32 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         # Decoder
         g_conv4, att4 = self.attentionblock4(conv4, gating)
         up4 = self.up_concat4(g_conv4, center)
-        self.layer_outputs['up_concat4'] = up4
-        print(f"Debug: Stored up_concat4 in layer_outputs with shape {up4.shape}")
 
         g_conv3, att3 = self.attentionblock3(conv3, up4)
         up3 = self.up_concat3(g_conv3, up4)
-        self.layer_outputs['up_concat3'] = up3
-        print(f"Debug: Stored up_concat3 in layer_outputs with shape {up3.shape}")
 
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
-        self.layer_outputs['up_concat2'] = up2
-        print(f"Debug: Stored up_concat2 in layer_outputs with shape {up2.shape}")
-        
+
+        # Compute logits for each layer
+        logits_up_concat4 = self.early_exit_up4(up4)
+        logits_up_concat3 = self.early_exit_up3(up3)
+        logits_up_concat2 = self.early_exit_up2(up2)
+        # self.layer_outputs['up_concat4'] = logits_up_concat4
+        # self.layer_outputs['up_concat3'] = logits_up_concat3
+        self.layer_outputs['up_concat2'] = logits_up_concat2
+
         # Early exit logic for up_concat2
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
-            if self.thresholds is None:  # Check if thresholds are available
+            print(f"Debug: Beginning to early exit for concat 2")
+            if self.thresholds is None: 
                 print("Debug: Thresholds not set, proceeding without early exit.")
-                pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
+                pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool) 
             else:
                 up2, pixel_mask = self.apply_early_exit(up2, self.thresholds)
 
             if pixel_mask is None:  # If all pixels are confident
                 return up2  # Return early exit predictions
-
-
-        # Early exit logic
-        # if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
-        #     early_exit_logits = self.early_exit(up2)  # Predict segmentation logits
-
-        #     # Confidence and predicted classes
-        #     early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]
-        #     predicted_classes = torch.argmax(F.softmax(early_exit_logits, dim=1), dim=1)
-
-        #     # Create pixel mask based on class-specific thresholds
-        #     pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
-        #     for cls in range(len(self.thresholds)):
-        #         class_mask = (predicted_classes == cls)
-        #         pixel_mask[class_mask] = early_exit_confidence[class_mask] < self.thresholds[cls]
-
-        #     early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]  # Compute pixel confidence
-
-        #     # Generate mask for unconfident pixels
-        #     pixel_mask = early_exit_confidence < self.thresholds[-1]  # Use appropriate threshold for this layer
-
-        #     if torch.sum(pixel_mask) == 0:  # If all pixels are confident
-        #         return F.softmax(early_exit_logits, dim=1)  # Return early exit prediction
-
-        #     # Mask confident pixels for further processing
-        #     up2 = up2 * pixel_mask.unsqueeze(1)  # Mask unconfident pixels
-        # else:
-        #     # Default: All pixels are unmasked if early exit is not used
-        #     pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool)  # Keep all pixels for further processing
 
         # Continue processing unconfident pixels
         up1 = self.up_concat1(conv1, up2)
@@ -199,30 +161,26 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         g_conv4, att4 = self.attentionblock4(conv4, gating)
         up4 = self.up_concat4(g_conv4, center)
         self.layer_outputs['up_concat4'] = up4
-        # print(f"Debug: Stored up_concat4 in layer_outputs with shape {up4.shape}")
 
         g_conv3, att3 = self.attentionblock3(conv3, up4)
         up3 = self.up_concat3(g_conv3, up4)
         self.layer_outputs['up_concat3'] = up3
-        # print(f"Debug: Stored up_concat3 in layer_outputs with shape {up3.shape}")
 
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
         self.layer_outputs['up_concat2'] = up2
-        # print(f"Debug: Stored up_concat2 in layer_outputs with shape {up2.shape}")
 
         # Compute logits for each layer
         logits_up_concat4 = self.early_exit_up4(up4)
         logits_up_concat3 = self.early_exit_up3(up3)
         logits_up_concat2 = self.early_exit_up2(up2)
-        self.layer_outputs['up_concat4'] = logits_up_concat4
-        self.layer_outputs['up_concat3'] = logits_up_concat3
+        # self.layer_outputs['up_concat4'] = logits_up_concat4
+        # self.layer_outputs['up_concat3'] = logits_up_concat3
         self.layer_outputs['up_concat2'] = logits_up_concat2
 
-        # Continue with further processing if needed
         up1 = self.up_concat1(conv1, up2)
 
-        print(f"Debug: Final layer_outputs keys: {self.layer_outputs.keys()}")
+        print(f"Final layer_outputs keys: {self.layer_outputs.keys()}")
 
         dsv4 = self.dsv4(up4)
         dsv3 = self.dsv3(up3)
