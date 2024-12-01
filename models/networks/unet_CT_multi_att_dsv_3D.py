@@ -78,10 +78,13 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
     def forward(self, inputs):
         if self.thresholds is None:
-            raise ValueError("Thresholds are None in forward method")
-            # return self.regular_forward(inputs)
+            # raise ValueError("Thresholds are None in forward method")
+            print(f"No threshold values found.")
+            print(f"Learning thresholds through regular_forward pass...")
+            return self.regular_forward(inputs)
         else:
-            print(f"Debug: Thresholds in forward: {self.thresholds}. Proceeding with early exit...")
+            print(f"Threshold values found: {self.thresholds}")
+            print(f"Proceeding with early exit...")
 
         # Encoder
         conv1 = self.conv1(inputs)
