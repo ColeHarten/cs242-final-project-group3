@@ -26,15 +26,17 @@ class FeedForwardSegmentation(BaseModel):
         self.target = None
         self.tensor_dim = opts.tensor_dim
 
-        self.thresholds = None
-        self.layer_outputs = {}
-
         # load/define networks
         self.net = get_network(opts.model_type, n_classes=opts.output_nc,
                                in_channels=opts.input_nc, nonlocal_mode=opts.nonlocal_mode,
                                tensor_dim=opts.tensor_dim, feature_scale=opts.feature_scale,
                                attention_dsample=opts.attention_dsample)
+        
         if self.use_cuda: self.net = self.net.cuda()
+
+        self.thresholds = self.net.thresholds
+        self.layer_outputs = self.net.layer_outputs
+        self.n_classes = self.net.n_classes
 
         # load the model if a path is specified or it is in inference mode
         if not self.isTrain or opts.continue_train:
@@ -124,14 +126,6 @@ class FeedForwardSegmentation(BaseModel):
         self.net.eval()
         self.forward(split='test')
         self.loss_S = self.criterion(self.prediction, self.target)
-
-    def set_thresholds(self, thresholds_path):
-        try:
-            self.thresholds = torch.load(thresholds_path)
-            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
-        except Exception as e:
-            print(f"Error loading thresholds: {e}")
-            self.thresholds = None
 
     def get_segmentation_stats(self):
         self.seg_scores, self.dice_score = segmentation_stats(self.prediction, self.target)

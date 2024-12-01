@@ -20,10 +20,15 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         filters = [int(x / self.feature_scale) for x in filters]
 
         self.early_exit_layer_name = 'up_concat2'  # Dynamically associate the target layer
-        self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)  # Early exit head
+        # self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)
+        self.early_exit_up4 = nn.Conv3d(filters[3], n_classes, kernel_size=1)
+        self.early_exit_up3 = nn.Conv3d(filters[2], n_classes, kernel_size=1)
+        self.early_exit_up2 = nn.Conv3d(filters[1], n_classes, kernel_size=1)
 
-        self.thresholds = None  # Define thresholds for early exit
-        self.layer_outputs = {}  # Dictionary to store outputs for all layers
+        self.thresholds = None
+        self.layer_outputs = {}
+        self.n_classes = n_classes
+        print(f"Debug: n_classes={n_classes}")
 
         # downsampling
         self.conv1 = UnetConv3(self.in_channels, filters[0], self.is_batchnorm, kernel_size=(3,3,3), padding_size=(1,1,1))
@@ -85,8 +90,10 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         
         if self.thresholds is None:
             # Fallback to default processing when thresholds are unavailable
-            print("Thresholds not set; proceeding without early exit.")
+            print("Debug: Thresholds NOT set successfully; proceeding WITHOUT early exit.")
             return self.regular_forward(inputs)
+        else:
+            print("Debug: Thresholds set successfully; proceeding WITH early exit.")
 
         # Encoder
         conv1 = self.conv1(inputs)
@@ -108,42 +115,57 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         g_conv4, att4 = self.attentionblock4(conv4, gating)
         up4 = self.up_concat4(g_conv4, center)
         self.layer_outputs['up_concat4'] = up4
+        print(f"Debug: Stored up_concat4 in layer_outputs with shape {up4.shape}")
 
         g_conv3, att3 = self.attentionblock3(conv3, up4)
         up3 = self.up_concat3(g_conv3, up4)
         self.layer_outputs['up_concat3'] = up3
+        print(f"Debug: Stored up_concat3 in layer_outputs with shape {up3.shape}")
 
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
         self.layer_outputs['up_concat2'] = up2
-    
-        # Early exit logic
+        print(f"Debug: Stored up_concat2 in layer_outputs with shape {up2.shape}")
+        
+        # Early exit logic for up_concat2
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
-            early_exit_logits = self.early_exit(up2)  # Predict segmentation logits
+            if self.thresholds is None:  # Check if thresholds are available
+                print("Debug: Thresholds not set, proceeding without early exit.")
+                pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
+            else:
+                up2, pixel_mask = self.apply_early_exit(up2, self.thresholds)
 
-            # Confidence and predicted classes
-            early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]
-            predicted_classes = torch.argmax(F.softmax(early_exit_logits, dim=1), dim=1)
+            if pixel_mask is None:  # If all pixels are confident
+                return up2  # Return early exit predictions
 
-            # Create pixel mask based on class-specific thresholds
-            pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
-            for cls in range(len(self.thresholds)):
-                class_mask = (predicted_classes == cls)
-                pixel_mask[class_mask] = early_exit_confidence[class_mask] < self.thresholds[cls]
 
-            early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]  # Compute pixel confidence
+        # Early exit logic
+        # if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
+        #     early_exit_logits = self.early_exit(up2)  # Predict segmentation logits
 
-            # Generate mask for unconfident pixels
-            pixel_mask = early_exit_confidence < self.thresholds[-1]  # Use appropriate threshold for this layer
+        #     # Confidence and predicted classes
+        #     early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]
+        #     predicted_classes = torch.argmax(F.softmax(early_exit_logits, dim=1), dim=1)
 
-            if torch.sum(pixel_mask) == 0:  # If all pixels are confident
-                return F.softmax(early_exit_logits, dim=1)  # Return early exit prediction
+        #     # Create pixel mask based on class-specific thresholds
+        #     pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
+        #     for cls in range(len(self.thresholds)):
+        #         class_mask = (predicted_classes == cls)
+        #         pixel_mask[class_mask] = early_exit_confidence[class_mask] < self.thresholds[cls]
 
-            # Mask confident pixels for further processing
-            up2 = up2 * pixel_mask.unsqueeze(1)  # Mask unconfident pixels
-        else:
-            # Default: All pixels are unmasked if early exit is not used
-            pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool)  # Keep all pixels for further processing
+        #     early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]  # Compute pixel confidence
+
+        #     # Generate mask for unconfident pixels
+        #     pixel_mask = early_exit_confidence < self.thresholds[-1]  # Use appropriate threshold for this layer
+
+        #     if torch.sum(pixel_mask) == 0:  # If all pixels are confident
+        #         return F.softmax(early_exit_logits, dim=1)  # Return early exit prediction
+
+        #     # Mask confident pixels for further processing
+        #     up2 = up2 * pixel_mask.unsqueeze(1)  # Mask unconfident pixels
+        # else:
+        #     # Default: All pixels are unmasked if early exit is not used
+        #     pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool)  # Keep all pixels for further processing
 
         # Continue processing unconfident pixels
         up1 = self.up_concat1(conv1, up2)
@@ -177,15 +199,30 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         g_conv4, att4 = self.attentionblock4(conv4, gating)
         up4 = self.up_concat4(g_conv4, center)
         self.layer_outputs['up_concat4'] = up4
+        # print(f"Debug: Stored up_concat4 in layer_outputs with shape {up4.shape}")
 
         g_conv3, att3 = self.attentionblock3(conv3, up4)
         up3 = self.up_concat3(g_conv3, up4)
         self.layer_outputs['up_concat3'] = up3
+        # print(f"Debug: Stored up_concat3 in layer_outputs with shape {up3.shape}")
 
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
         self.layer_outputs['up_concat2'] = up2
+        # print(f"Debug: Stored up_concat2 in layer_outputs with shape {up2.shape}")
+
+        # Compute logits for each layer
+        logits_up_concat4 = self.early_exit_up4(up4)
+        logits_up_concat3 = self.early_exit_up3(up3)
+        logits_up_concat2 = self.early_exit_up2(up2)
+        self.layer_outputs['up_concat4'] = logits_up_concat4
+        self.layer_outputs['up_concat3'] = logits_up_concat3
+        self.layer_outputs['up_concat2'] = logits_up_concat2
+
+        # Continue with further processing if needed
         up1 = self.up_concat1(conv1, up2)
+
+        print(f"Debug: Final layer_outputs keys: {self.layer_outputs.keys()}")
 
         dsv4 = self.dsv4(up4)
         dsv3 = self.dsv3(up3)
@@ -193,8 +230,47 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         dsv1 = self.dsv1(up1)
 
         final = self.final(torch.cat([dsv1, dsv2, dsv3, dsv4], dim=1))
-
+        
         return final
+    
+    def apply_early_exit(self, feature_map, thresholds):
+        """
+        Apply early exit logic to the feature map.
+
+        Args:
+            feature_map (torch.Tensor): Input feature map, shape [B, C, D, H, W].
+            thresholds (list or None): Class-specific thresholds for confidence.
+
+        Returns:
+            Tuple[torch.Tensor, torch.BoolTensor]: 
+                - Early exit predictions if all pixels are confident, otherwise masked feature map.
+                - Pixel mask indicating unconfident pixels.
+        """
+        # Predict segmentation logits
+        early_exit_logits = self.early_exit(feature_map)
+
+        # If thresholds are not set, skip early exit
+        if thresholds is None:
+            print("Debug: Thresholds not set, skipping early exit.")
+            return feature_map, torch.ones_like(feature_map[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
+
+        # Confidence and predicted classes
+        early_exit_confidence = torch.max(F.softmax(early_exit_logits, dim=1), dim=1)[0]
+        predicted_classes = torch.argmax(F.softmax(early_exit_logits, dim=1), dim=1)
+
+        # Create pixel mask based on class-specific thresholds
+        pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
+        for cls in range(len(thresholds)):
+            class_mask = (predicted_classes == cls)
+            pixel_mask[class_mask] = early_exit_confidence[class_mask] < thresholds[cls]
+
+        # Check if all pixels are confident
+        if torch.sum(pixel_mask) == 0:  # If all pixels are confident
+            return F.softmax(early_exit_logits, dim=1), None  # Return predictions, no mask needed
+
+        # Mask confident pixels for further processing
+        masked_feature_map = feature_map * pixel_mask.unsqueeze(1)  # Mask unconfident pixels
+        return masked_feature_map, pixel_mask
 
     @staticmethod
     def apply_argmax_softmax(pred):
