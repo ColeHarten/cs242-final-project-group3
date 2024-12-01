@@ -12,9 +12,6 @@
 module load Mambaforge
 mamba activate myenv
 
-# Debug info
-echo "CUDA version:"
-nvcc --version
 echo "Python version:"
 python --version
 echo "Python path:"
