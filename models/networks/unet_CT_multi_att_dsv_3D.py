@@ -18,9 +18,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
         filters = [64, 128, 256, 512, 1024]
         filters = [int(x / self.feature_scale) for x in filters]
-
-        self.early_exit_layer_name = 'up_concat2'
-        self.early_exit = nn.Conv3d(filters[1], n_classes, kernel_size=1)
+        
         self.early_exit_up4 = nn.Conv3d(filters[3], n_classes, kernel_size=1)
         self.early_exit_up3 = nn.Conv3d(filters[2], n_classes, kernel_size=1)
         self.early_exit_up2 = nn.Conv3d(filters[1], n_classes, kernel_size=1)
@@ -28,7 +26,6 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.thresholds = None
         self.layer_outputs = {}
         self.n_classes = n_classes
-        print(f"Debug: n_classes={n_classes}")
 
         # downsampling
         self.conv1 = UnetConv3(self.in_channels, filters[0], self.is_batchnorm, kernel_size=(3,3,3), padding_size=(1,1,1))
@@ -79,12 +76,12 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
     def forward(self, inputs):
         if self.thresholds is None:
             # raise ValueError("Thresholds are None in forward method")
-            print(f"No threshold values found.")
+            print(f"No threshold values loaded.")
             print(f"Learning thresholds through regular_forward pass...")
             return self.regular_forward(inputs)
         else:
-            print(f"Threshold values found: {self.thresholds}")
-            print(f"Proceeding with early exit...")
+            print(f"Threshold values loaded: {self.thresholds}")
+            print(f"Using thresholds in forward pass ...")
 
         # Encoder
         conv1 = self.conv1(inputs)
@@ -116,23 +113,33 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         logits_up_concat4 = self.early_exit_up4(up4)
         logits_up_concat3 = self.early_exit_up3(up3)
         logits_up_concat2 = self.early_exit_up2(up2)
-        # self.layer_outputs['up_concat4'] = logits_up_concat4
-        # self.layer_outputs['up_concat3'] = logits_up_concat3
+        self.layer_outputs['up_concat4'] = logits_up_concat4
+        self.layer_outputs['up_concat3'] = logits_up_concat3
         self.layer_outputs['up_concat2'] = logits_up_concat2
 
-        # Early exit logic for up_concat2
-        if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
-            print(f"Debug: Beginning to early exit for concat 2")
-            if self.thresholds is None: 
-                print("Debug: Thresholds not set, proceeding without early exit.")
-                pixel_mask = torch.ones_like(up2[:, 0], dtype=torch.bool) 
-            else:
-                up2, pixel_mask = self.apply_early_exit(up2, self.thresholds)
+        # Early exit logic for multiple layers
+        for layer_name, feature_map, early_exit_layer in zip(
+            ["up_concat4", "up_concat3", "up_concat2"],
+            [up4, up3, up2],
+            [self.early_exit_up4, self.early_exit_up3, self.early_exit_up2],
+        ):
+            print(f"Checking early exit for {layer_name}")
 
-            if pixel_mask is None:  # If all pixels are confident
-                return up2  # Return early exit predictions
+            if self.thresholds is None:
+                print(f"Thresholds not set for {layer_name}. Proceeding without early exit.")
+                continue
 
-        # Continue processing unconfident pixels
+            logits, pixel_mask = self.apply_early_exit(feature_map, early_exit_layer, self.thresholds)
+
+            if pixel_mask is None:
+                print(f"Exiting early at {layer_name}")
+                return logits
+            
+            print(f"{pixel_mask.sum().item()}/{pixel_mask.numel()} pixels masked as confident.")
+            print(f"Continuing with {(~pixel_mask).sum().item()} unconfident pixels at {layer_name}.")
+
+            feature_map = feature_map * pixel_mask.unsqueeze(1)
+
         up1 = self.up_concat1(conv1, up2)
 
         dsv4 = self.dsv4(up4)
@@ -185,6 +192,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
         print(f"Final layer_outputs keys: {self.layer_outputs.keys()}")
 
+        # Deep Supervision
         dsv4 = self.dsv4(up4)
         dsv3 = self.dsv3(up3)
         dsv2 = self.dsv2(up2)
@@ -194,7 +202,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         
         return final
     
-    def apply_early_exit(self, feature_map, thresholds):
+    def apply_early_exit(self, feature_map, early_exit_layer, thresholds):
         """
         Apply early exit logic to the feature map.
 
@@ -208,11 +216,11 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
                 - Pixel mask indicating unconfident pixels.
         """
         # Predict segmentation logits
-        early_exit_logits = self.early_exit(feature_map)
+        early_exit_logits = early_exit_layer(feature_map)
 
         # If thresholds are not set, skip early exit
         if thresholds is None:
-            print("Debug: Thresholds not set, skipping early exit.")
+            print("Thresholds not set, skipping early exit.")
             return feature_map, torch.ones_like(feature_map[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
 
         # Confidence and predicted classes
