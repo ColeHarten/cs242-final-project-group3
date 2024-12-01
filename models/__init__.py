@@ -56,7 +56,7 @@ class ModelOpts:
         # Classifier
         if hasattr(opts, 'aggregation_mode'): self.aggregation_mode = opts.aggregation_mode
 
-def get_model(json_opts):
+def get_model(json_opts, verbose=True):
 
     # Neural Network Model Initialisation
     model = None
@@ -83,7 +83,7 @@ def get_model(json_opts):
         model = AggregatedClassifier()
 
     # Initialise the created model
-    model.initialize(model_opts, verbose=False)
+    model.initialize(model_opts, verbose=verbose)
     print("Model [%s] is created" % (model.name()))
 
     return model
