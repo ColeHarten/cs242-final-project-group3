@@ -80,7 +80,7 @@ def train(arguments):
             with torch.no_grad():
                 for layer_name, feature_map in model.layer_outputs.items():
                     probs = F.softmax(feature_map, dim=1)  # Convert logits to probabilities
-                    print(f"Debug: Probabilities from {layer_name}, shape: {probs.shape}, max: {probs.max().item()}, min: {probs.min().item()}")
+                    # print(f"Probabilities from {layer_name}, shape: {probs.shape}, max: {probs.max().item()}, min: {probs.min().item()}")
 
                     # Resize labels to match the spatial dimensions of probs
                     if labels.ndim == 4:
@@ -89,8 +89,7 @@ def train(arguments):
 
                     for cls in range(probs.shape[1]):
                         class_mask = (resized_labels == cls) 
-                        print(f"Debug: Class {cls} mask: {class_mask.sum().item()} active pixels")
-
+                        # print(f"Class {cls} mask: {class_mask.sum().item()} active pixels")
                         if class_mask.any():
                             class_probs = probs[:, cls, :, :, :]
                             mean_prob = class_probs[class_mask].mean().item()
@@ -146,9 +145,10 @@ def train(arguments):
             for layer_name in layer_probs:
                 if len(layer_probs[layer_name][cls]) > 0:
                     layer_means.append(sum(layer_probs[layer_name][cls]) / len(layer_probs[layer_name][cls]))
+                print(f"Debug: Class {cls}, layer means: {layer_means}")
             if layer_means:
-                class_mean_probs[cls] = sum(layer_means) / len(layer_means)
-            print(f"Debug: Class {cls}, layer means: {layer_means}")
+                class_mean_probs[cls].extend(layer_means)
+            print(f"Debug: Class_mean_probs[{cls}] = {class_mean_probs[cls]}")
         print(f"Debug: Final class mean probabilities: {class_mean_probs}")
 
         # Compute and scale thresholds
