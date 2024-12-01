@@ -180,7 +180,7 @@ def train(arguments):
         print(f"Scaled thresholds saved: {scaled_thresholds}")
     else:
         print("Debug: model.thresholds is not none")
-        print("Debug: model.thresholds={model.thresholds}")
+        print(f"Debug: model.thresholds={model.thresholds}")
 
 if __name__ == '__main__':
     import argparse

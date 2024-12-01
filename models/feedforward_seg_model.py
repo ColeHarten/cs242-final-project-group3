@@ -146,14 +146,15 @@ class FeedForwardSegmentation(BaseModel):
         feature_extractor = HookBasedFeatureExtractor(self.net, layer_name, upscale)
         return feature_extractor.forward(Variable(self.input))
     
-    # Set thresholds for CBT in attention unet for CT scans
     def set_thresholds(self, thresholds_path):
         try:
             self.thresholds = torch.load(thresholds_path)
-            print(f"Thresholds loaded from {thresholds_path}: {self.thresholds}")
+            self.net.thresholds = self.thresholds
+            print(f"Thresholds loaded from {thresholds_path}: {self.net.thresholds}")
         except Exception as e:
             print(f"Error loading thresholds: {e}")
             self.thresholds = None
+            self.net.thresholds = None
 
     # returns the fp/bp times of the model
     def get_fp_bp_time (self, size=None):
