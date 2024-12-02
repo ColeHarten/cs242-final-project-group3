@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from models.networks_other import init_weights
 from models.layers.grid_attention_layer import GridAttentionBlock3D
 
+from datetime import datetime as t
 
 class unet_CT_multi_att_dsv_3D(nn.Module):
 
@@ -86,6 +87,8 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
             print(f"Threshold values found: {self.thresholds}")
             print(f"Proceeding with early exit...")
 
+        start_1 = t.now()    
+            
         # Encoder
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
@@ -120,6 +123,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         # self.layer_outputs['up_concat3'] = logits_up_concat3
         self.layer_outputs['up_concat2'] = logits_up_concat2
 
+        t_1 = t.now() - start_1
+        
+        
         # Early exit logic for up_concat2
         if hasattr(self, 'early_exit_layer_name') and self.early_exit_layer_name == 'up_concat2':
             print(f"Debug: Beginning to early exit for concat 2")
@@ -131,7 +137,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
             if pixel_mask is None:  # If all pixels are confident
                 return up2  # Return early exit predictions
-
+        
+        start_2 = t.now()
+            
         # Continue processing unconfident pixels
         up1 = self.up_concat1(conv1, up2)
 
@@ -140,8 +148,10 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         dsv2 = self.dsv2(up2)
         dsv1 = self.dsv1(up1)
         final = self.final(torch.cat([dsv1, dsv2, dsv3, dsv4], dim=1))
-
-        return final
+        
+        total_t = t_1 + (t.now() - start_2)
+        
+        return final, total_t
     
     def regular_forward(self, inputs):
         # Encoder

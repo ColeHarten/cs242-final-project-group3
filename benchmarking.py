@@ -28,12 +28,18 @@ def test_baseline_model(pretrained_model_path):
     ds_class = get_dataset(arch_type)
     ds_path = get_dataset_path(arch_type, json_opts.data_path)
     ds_transform = get_dataset_transformation(arch_type, opts=json_opts.augmentation)
-
+    
     # Setup the NN Model
-    model = get_model(json_opts.model, verbose=False)
-
+    model = get_model(json_opts.model)
+    
     # Load the pretrained model
     model.load_network_from_path(model.net, pretrained_model_path, strict=True)
+    
+    try:
+        model.set_thresholds('thresholds.pt')
+    except FileNotFoundError:
+        print("Thresholds not found. Training will proceed without thresholds.")
+
         
     # Setup Data Loader
     test_dataset = ds_class(
@@ -52,11 +58,9 @@ def test_baseline_model(pretrained_model_path):
     # Testing Iterations
     print("Starting testing...")
     
-    start = t.now()
+    total_time = 0
     
-    total_flops = 0
-    
-    niters = 100
+    niters = 10
     
     for _ in range(niters):
         for images, labels in tqdm(test_loader, total=len(test_loader), file=sys.stdout):
@@ -66,17 +70,19 @@ def test_baseline_model(pretrained_model_path):
 
             # Perform forward pass
             model.set_input(images, labels)
-            model.validate()
-
+            time = model.validate()
+            
+            print(time, type(time))
+            
+            total_time += time.total_seconds()
 
             # Log errors and stats
             errors = model.get_current_errors()
             stats = model.get_segmentation_stats()
             error_logger.update({**errors, **stats}, split='test')
-        
-    end = t.now()
+
     
-    print(f"Inference took an average of {(end-start)/(len(test_loader)*niters)} seconds per image.")
+    print(f"Inference took an average of {total_time/(len(test_loader)*niters)} seconds per image.")
     
     # Summarize results
     test_errors = error_logger.get_errors('test')

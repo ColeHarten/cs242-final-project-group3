@@ -7,7 +7,6 @@
 #SBATCH -o train_%j.out
 #SBATCH -e train_%j.err 
 
-
 # Activate mamba env
 module load Mambaforge
 mamba activate myenv
@@ -23,4 +22,4 @@ nvidia-smi
 
 # Run the Python scripts with the provided parameters
 echo "Setup done. Starting benchmarking..."
-python benchmarking.py --file checkpoints/experiment_unet_ct_multi_att_dsv/095_net_S.pth
+python benchmarking.py --file checkpoints/early_exit_unet_ct_multi_att_dsv/020_net_S.pth
