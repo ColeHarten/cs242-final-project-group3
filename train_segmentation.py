@@ -69,7 +69,7 @@ def train(arguments):
     for epoch in range(model.which_epoch, train_opts.n_epochs):
         print('(epoch: %d, total # iters: %d)' % (epoch, len(train_loader)))
 
-        # Training Iterations (Lei Temporarily Modified)
+        # Training Iterations
         for epoch_iter, (images, labels) in tqdm(enumerate(train_loader, 1), total=len(train_loader)):
             # Make a training update
             model.set_input(images, labels)
@@ -80,7 +80,7 @@ def train(arguments):
             with torch.no_grad():
                 for layer_name, feature_map in model.layer_outputs.items():
                     probs = F.softmax(feature_map, dim=1)  # Convert logits to probabilities
-                    # print(f"Probabilities from {layer_name}, shape: {probs.shape}, max: {probs.max().item()}, min: {probs.min().item()}")
+                    print(f"Probabilities from {layer_name}, shape: {probs.shape}, max: {probs.max().item()}, min: {probs.min().item()}")
 
                     # Resize labels to match the spatial dimensions of probs
                     if labels.ndim == 4:
@@ -89,7 +89,7 @@ def train(arguments):
 
                     for cls in range(probs.shape[1]):
                         class_mask = (resized_labels == cls) 
-                        # print(f"Class {cls} mask: {class_mask.sum().item()} active pixels")
+                        print(f"Class {cls} mask: {class_mask.sum().item()} active pixels for current class.")
                         if class_mask.any():
                             class_probs = probs[:, cls, :, :, :]
                             mean_prob = class_probs[class_mask].mean().item()
@@ -135,7 +135,7 @@ def train(arguments):
         # Update the model learning rate
         model.update_learning_rate()
 
-    print(f"Debug: layer probabilities {layer_probs.items()}")
+    print(f"Layer probabilities {layer_probs.items()}")
 
     if model.thresholds is None:
         # Average probabilities across all layers
@@ -145,15 +145,14 @@ def train(arguments):
             for layer_name in layer_probs:
                 if len(layer_probs[layer_name][cls]) > 0:
                     layer_means.append(sum(layer_probs[layer_name][cls]) / len(layer_probs[layer_name][cls]))
-                print(f"Debug: Class {cls}, layer means: {layer_means}")
             if layer_means:
                 class_mean_probs[cls].extend(layer_means)
-            print(f"Debug: Class_mean_probs[{cls}] = {class_mean_probs[cls]}")
-        print(f"Debug: Final class mean probabilities: {class_mean_probs}")
+            print(f"Class_mean_probs[{cls}] = {class_mean_probs[cls]}")
+        print(f"Final class mean probabilities: {class_mean_probs}")
 
         # Compute and scale thresholds
         thresholds = []
-        alpha, beta = 0.95, 0.998 # hyperparameters for threshold scaling
+        alpha, beta = 0.10, 0.95 # hyperparameters for threshold scaling
         for cls in range(model.n_classes):
             if cls not in class_mean_probs or not class_mean_probs[cls]:
                 thresholds.append(0)
@@ -162,7 +161,7 @@ def train(arguments):
                 T_k = sorted_probs[0] - sorted_probs[1] if len(sorted_probs) > 1 else sorted_probs[0]
                 thresholds.append(T_k)
 
-        print(f"Debug: Thresholds= {thresholds}")
+        print(f"Raw thresholds: {thresholds}")
 
         min_T, max_T = min(thresholds), max(thresholds)
         scaled_thresholds = [
@@ -170,7 +169,7 @@ def train(arguments):
             for T_k in thresholds
         ]
 
-        print(f"Debug: Raw thresholds: {thresholds}, scaled thresholds: {scaled_thresholds}")
+        print(f"Scaled thresholds: {scaled_thresholds}")
 
         try:
             torch.save(scaled_thresholds, 'thresholds.pt')
@@ -179,8 +178,7 @@ def train(arguments):
     
         print(f"Scaled thresholds saved: {scaled_thresholds}")
     else:
-        print("Debug: model.thresholds is not none")
-        print(f"Debug: model.thresholds={model.thresholds}")
+        print(f"Model thresholds exist and don't need to be learned: {model.thresholds}")
 
 if __name__ == '__main__':
     import argparse
