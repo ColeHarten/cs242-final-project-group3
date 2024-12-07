@@ -51,12 +51,9 @@ def test_baseline_model(pretrained_model_path):
 
     # Testing Iterations
     print("Starting testing...")
-    
-    start = t.now()
-    
-    total_flops = 0
-    
-    niters = 100
+
+    niters = 10
+    total_time = 0
     
     for _ in range(niters):
         for images, labels in tqdm(test_loader, total=len(test_loader), file=sys.stdout):
@@ -66,7 +63,9 @@ def test_baseline_model(pretrained_model_path):
 
             # Perform forward pass
             model.set_input(images, labels)
-            model.validate()
+            t = model.validate()
+            
+            total_time += t.total_seconds()
 
 
             # Log errors and stats
@@ -74,9 +73,8 @@ def test_baseline_model(pretrained_model_path):
             stats = model.get_segmentation_stats()
             error_logger.update({**errors, **stats}, split='test')
         
-    end = t.now()
     
-    print(f"Inference took an average of {(end-start)/(len(test_loader)*niters)} seconds per image.")
+    print(f"Inference took an average of {total_time/(len(test_loader)*niters)} seconds per image.")
     
     # Summarize results
     test_errors = error_logger.get_errors('test')

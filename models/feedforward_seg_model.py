@@ -83,10 +83,11 @@ class FeedForwardSegmentation(BaseModel):
             self.prediction = self.net(Variable(self.input))
         elif split == 'test':
             with torch.no_grad():
-                self.prediction = self.net(self.input)
+                self.prediction, time = self.net(self.input)
             # Apply a softmax and return a segmentation map
             self.logits = self.net.apply_argmax_softmax(self.prediction)
             self.pred_seg = self.logits.data.max(1)[1].unsqueeze(1)
+        return time
             
     def backward(self):
         self.loss_S = self.criterion(self.prediction, self.target)
@@ -118,8 +119,9 @@ class FeedForwardSegmentation(BaseModel):
 
     def validate(self):
         self.net.eval()
-        self.forward(split='test')
+        time = self.forward(split='test')
         self.loss_S = self.criterion(self.prediction, self.target)
+        return time
 
     def get_segmentation_stats(self):
         self.seg_scores, self.dice_score = segmentation_stats(self.prediction, self.target)

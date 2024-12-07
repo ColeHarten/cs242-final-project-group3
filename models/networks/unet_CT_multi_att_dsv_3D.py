@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from models.networks_other import init_weights
 from models.layers.grid_attention_layer import GridAttentionBlock3D
 
+from datetime import datetime as t
 
 class unet_CT_multi_att_dsv_3D(nn.Module):
 
@@ -66,6 +67,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
                 init_weights(m, init_type='kaiming')
 
     def forward(self, inputs):
+        
+        start = t.now()
+        
         # Feature Extraction
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
@@ -99,8 +103,10 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         dsv2 = self.dsv2(up2)
         dsv1 = self.dsv1(up1)
         final = self.final(torch.cat([dsv1,dsv2,dsv3,dsv4], dim=1))
-
-        return final
+    
+        total = t.now() - start
+        
+        return final, total
 
 
     @staticmethod
