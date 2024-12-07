@@ -65,7 +65,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.dsv1 = nn.Conv3d(in_channels=filters[0], out_channels=n_classes, kernel_size=1)
 
         # final conv (without any concat)
-        self.final = nn.Conv3d(n_classes*4, n_classes, 1)
+        self.final = nn.Conv3d(240, n_classes, 1)
 
         # initialise weights
         for m in self.modules():
@@ -82,8 +82,6 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         else:
             print(f"Threshold values loaded: {self.thresholds}")
             print(f"Using thresholds in forward pass ...")
-
-        start_1 = t.now()
 
         # Encoder
         conv1 = self.conv1(inputs)
@@ -125,7 +123,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
                 print(f"Thresholds not set for {layer_name}. Proceeding without early exit.")
                 continue
 
-            confident_features, masked_feature_map, pixel_mask = self.apply_early_exit(gated_output, pixel_mask, self.thresholds)
+            confident_features, masked_feature_map, pixel_mask = self.apply_early_exit(gated_output, self.thresholds)
 
 
             print(f"{pixel_mask.sum().item()}/{pixel_mask.numel()} pixels masked as confident.")
@@ -140,13 +138,13 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         saved_confident_features.append(up1)
                        
         # At the end, combine saved confident features with final output
-        final_saved_features = torch.cat(saved_confident_features, dim=1)
+        target_size = gated_output.shape[2:]  # Match the spatial size of the final gated_output
+        resampled_features = [F.interpolate(f, size=target_size, mode='trilinear', align_corners=False) for f in saved_confident_features]
+        final_saved_features = torch.cat(resampled_features, dim=1)
 
         final = self.final(final_saved_features)
-        
-        total_t = t.now() - start_1
 
-        return final, total_t
+        return final
 
     
     def regular_forward(self, inputs):
