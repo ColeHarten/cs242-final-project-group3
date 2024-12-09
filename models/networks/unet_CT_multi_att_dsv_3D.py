@@ -21,7 +21,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         
         # self.early_exit_up4 = nn.Conv3d(filters[3], n_classes, kernel_size=1)
         # self.early_exit_up3 = nn.Conv3d(filters[2], n_classes, kernel_size=1)
-        self.early_exit_up2 = nn.Conv3d(filters[1], n_classes, kernel_size=1)
+        # self.early_exit_up2 = nn.Conv3d(filters[1], n_classes, kernel_size=1)
 
         self.thresholds = None
         self.layer_outputs = {}
@@ -118,10 +118,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         # self.layer_outputs['up_concat2'] = logits_up_concat2
 
         # Early exit logic for multiple layers
-        for layer_name, feature_map, early_exit_layer in zip(
+        for layer_name, feature_map in zip(
             ["up_concat2"],
             [up2],
-            [self.early_exit_up2],
         ):
             print(f"Checking early exit for {layer_name}")
 
@@ -129,7 +128,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
                 print(f"Thresholds not set for {layer_name}. Proceeding without early exit.")
                 continue
 
-            unconfident_map, confident_map, pixel_mask = self.apply_early_exit(feature_map, early_exit_layer, (160, 160, 96), self.thresholds)
+            unconfident_map, confident_map, pixel_mask = self.apply_early_exit(feature_map, self.thresholds, (160, 160, 96))
             
             print(f"{pixel_mask.sum().item()}/{pixel_mask.numel()} pixels masked as confident.")
             print(f"Continuing with {(~pixel_mask).sum().item()} unconfident pixels at {layer_name}.")
@@ -146,6 +145,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         dsv3 = self.dsv3(up3)
         dsv2 = self.dsv2(up2)
         dsv1 = self.dsv1(up1)
+        
         final = self.final(torch.cat([dsv1, dsv2, dsv3, dsv4], dim=1))
 
         return final
@@ -181,9 +181,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.layer_outputs['up_concat2'] = up2
 
         # Compute logits for each layer
-        logits_up_concat4 = self.early_exit_up4(up4)
-        logits_up_concat3 = self.early_exit_up3(up3)
-        logits_up_concat2 = self.early_exit_up2(up2)
+        logits_up_concat4 = self.exit_up2(up2)
         # self.layer_outputs['up_concat4'] = logits_up_concat4
         # self.layer_outputs['up_concat3'] = logits_up_concat3
         self.layer_outputs['up_concat2'] = logits_up_concat2
@@ -202,13 +200,14 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         
         return final
     
+    import torch.nn.functional as F
+
     def apply_early_exit(self, feature_map, thresholds, target_shape):
         """
         Apply early exit logic and interpolate the pixel mask to match the target shape.
 
         Args:
             feature_map (torch.Tensor): Input feature map, shape [B, C, D, H, W].
-            early_exit_layer (nn.Module): Layer to compute early exit logits.
             thresholds (list or None): Class-specific thresholds for confidence.
             target_shape (tuple): Desired output shape (spatial dimensions) for upsampling.
 
@@ -218,19 +217,15 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
                 - Confident map.
                 - Interpolated pixel mask.
         """
-        # Predict segmentation logits
-        # early_exit_logits = early_exit_layer(feature_map)
         
-        feature_map_interpolated = F.interpolate(feature_map.float(), size=target_shape, mode='trilinear', align_corners=False).bool()
-
         # If thresholds are not set, skip early exit
         if thresholds is None:
             print("Thresholds not set, skipping early exit.")
-            pixel_mask = torch.ones_like(feature_map_interpolated[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
+            pixel_mask = torch.ones_like(feature_map[:, 0], dtype=torch.bool)  # Default mask: no pixels excluded
         else:
-            # Confidence and predicted classes
-            early_exit_confidence = torch.max(F.softmax(feature_map_interpolated, dim=1), dim=1)[0]
-            predicted_classes = torch.argmax(F.softmax(feature_map_interpolated, dim=1), dim=1)
+            # Compute confidence and predicted classes
+            softmax_confidence = F.softmax(feature_map, dim=1)
+            early_exit_confidence, predicted_classes = torch.max(softmax_confidence, dim=1)
 
             # Create pixel mask based on class-specific thresholds
             pixel_mask = torch.zeros_like(early_exit_confidence, dtype=torch.bool)
@@ -241,12 +236,16 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
             # Expand dimensions for broadcasting
             pixel_mask = pixel_mask.unsqueeze(1)
 
-
         # Separate confident and unconfident feature maps
-        unconfident_map = feature_map * pixel_mask
-        confident_map = feature_map * (~pixel_mask)
+        unconfident_map = feature_map * pixel_mask.float()
+        confident_map = feature_map * (~pixel_mask).float()
 
-        return unconfident_map, confident_map, pixel_mask
+        # Interpolate the pixel mask and feature maps to the target shape
+        interpolated_mask = F.interpolate(pixel_mask.float(), size=target_shape, mode='trilinear', align_corners=False).bool()
+        # unconfident_map_interpolated = F.interpolate(unconfident_map, size=target_shape, mode='trilinear', align_corners=False)
+        confident_map_interpolated = F.interpolate(confident_map, size=target_shape, mode='trilinear', align_corners=False)
+
+        return unconfident_map, confident_map_interpolated, interpolated_mask
 
 
     @staticmethod
