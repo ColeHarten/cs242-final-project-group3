@@ -141,10 +141,6 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         pixel_mask = F.interpolate(pixel_mask.unsqueeze(1).float(), size=target_size, mode='trilinear').squeeze(1).bool()
         confident_features = F.interpolate(confident_features, size=target_size, mode='trilinear', align_corners=False)
         
-        print(f"up1 shape: {up1.shape}")
-        print(f"mask shape: {pixel_mask.shape}")
-        print(f"confident map shape: {confident_features.shape}")
-        
         
         up1 = (up1 * pixel_mask.unsqueeze(1)) + confident_features
 
