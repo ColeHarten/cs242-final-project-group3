@@ -1,7 +1,7 @@
 {
   "training":{
     "arch_type": "acdc_sax",
-    "n_epochs": 50,
+    "n_epochs": 100,
     "save_epoch_freq": 5,
     "lr_policy": "step",
     "lr_decay_iters": 250,
@@ -44,7 +44,7 @@
     "gpu_ids": [0],
     "isTrain": true,
     "checkpoints_dir": "./checkpoints",
-    "experiment_name": "experiment_unet_ct_multi_att_dsv_early_exit",
+    "experiment_name": "experiment_unet_ct_multi_att_dsv_early_exit_v2",
     "criterion": "dice_loss"
   }
 }
