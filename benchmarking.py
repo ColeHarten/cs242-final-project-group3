@@ -45,6 +45,8 @@ def test_baseline_model(pretrained_model_path):
 
     # Set the model to evaluation mode
     model.net.eval()
+    
+    model.set_thresholds("thresholds.pt")
 
     # Initialize the error logger
     error_logger = ErrorLogger()
@@ -52,9 +54,7 @@ def test_baseline_model(pretrained_model_path):
     # Testing Iterations
     print("Starting testing...")
     
-    start = t.now()
-    
-    total_flops = 0
+    total_time = 0 
     
     niters = 100
     
@@ -66,17 +66,15 @@ def test_baseline_model(pretrained_model_path):
 
             # Perform forward pass
             model.set_input(images, labels)
-            model.validate()
-
+            time = model.validate()
+            total_time += time
 
             # Log errors and stats
             errors = model.get_current_errors()
             stats = model.get_segmentation_stats()
             error_logger.update({**errors, **stats}, split='test')
-        
-    end = t.now()
     
-    print(f"Inference took an average of {(end-start)/(len(test_loader)*niters)} seconds per image.")
+    print(f"Inference took an average of {total_time/(len(test_loader)*niters)} seconds per image.")
     
     # Summarize results
     test_errors = error_logger.get_errors('test')

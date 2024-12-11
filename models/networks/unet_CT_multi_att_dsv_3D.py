@@ -184,10 +184,10 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         self.layer_outputs['up_concat2'] = up2
 
         # Compute logits for each layer
-        logits_up_concat4 = self.exit_up2(up2)
+        # logits_up_concat4 = self.exit_up2(up2)
         # self.layer_outputs['up_concat4'] = logits_up_concat4
         # self.layer_outputs['up_concat3'] = logits_up_concat3
-        self.layer_outputs['up_concat2'] = logits_up_concat2
+        # self.layer_outputs['up_concat2'] = up2
 
         up1 = self.up_concat1(conv1, up2)
 

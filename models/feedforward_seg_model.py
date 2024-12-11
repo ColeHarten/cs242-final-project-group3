@@ -2,6 +2,8 @@ import torch
 from torch.autograd import Variable
 import torch.optim as optim
 
+from datetime import datetime as t
+
 from collections import OrderedDict
 import utils.util as util
 from .base_model import BaseModel
@@ -123,9 +125,13 @@ class FeedForwardSegmentation(BaseModel):
         self.forward(split='test')
 
     def validate(self):
+        start = t.now()
+        
         self.net.eval()
         self.forward(split='test')
         self.loss_S = self.criterion(self.prediction, self.target)
+        
+        return (t.now() - start).total_seconds()
 
     def get_segmentation_stats(self):
         self.seg_scores, self.dice_score = segmentation_stats(self.prediction, self.target)
