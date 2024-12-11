@@ -63,10 +63,8 @@ def test_baseline_model(pretrained_model_path):
 
             # Perform forward pass
             model.set_input(images, labels)
-            t = model.validate()
-            
-            total_time += t.total_seconds()
-
+            time = model.validate()
+            total_time += time
 
             # Log errors and stats
             errors = model.get_current_errors()

@@ -1,6 +1,7 @@
 import torch
 from torch.autograd import Variable
 import torch.optim as optim
+from datetime import datetime as t
 
 from collections import OrderedDict
 import utils.util as util
@@ -79,15 +80,17 @@ class FeedForwardSegmentation(BaseModel):
                 assert self.input.size() == self.target.size()
 
     def forward(self, split):
+        start = t.now()
         if split == 'train':
             self.prediction = self.net(Variable(self.input))
         elif split == 'test':
             with torch.no_grad():
-                self.prediction, time = self.net(self.input)
+                self.prediction = self.net(self.input)
             # Apply a softmax and return a segmentation map
             self.logits = self.net.apply_argmax_softmax(self.prediction)
             self.pred_seg = self.logits.data.max(1)[1].unsqueeze(1)
-        return time
+        
+        return (t.now() - start).total_seconds()
             
     def backward(self):
         self.loss_S = self.criterion(self.prediction, self.target)

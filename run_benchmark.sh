@@ -20,4 +20,4 @@ nvidia-smi
 
 # Run the Python scripts with the provided parameters
 echo "Setup done. Starting benchmarking..."
-python benchmarking.py --file checkpoints/experiment_unet_ct_multi_att_dsv/095_net_S.pth
+python benchmarking.py --file checkpoints/experiment_unet_ct_multi_att_dsv_early_exit_v2/095_net_S.pth
