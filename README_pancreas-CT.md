@@ -1,4 +1,5 @@
-### How to replicate pre-processing work to train model on CT-82 Pancreas dataset:
+# Early Exiting Addition to Attention U-Net
+## How to replicate pre-processing work to train model on CT-82 Pancreas dataset:
 
 1. The zipped data file in a Linux-friendly format is uploaded it to [this Google Drive](https://drive.google.com/drive/folders/1ZSwFGscVusxHJfpHTQourWhYMRNxAKoQ?usp=drive_linkhttps:/) folder in our team folder.
 
@@ -37,30 +38,14 @@ train
 Make sure you adjust the data path in the json file (or just name the folder with your data “data”).
 5. All other code changes i made to update deprecated packages etc. are in the `pancreas-CT` branch of our git repo. Pull that to start training before you do steps 1-4. **Do not overwite any changes.**
 
-#### Common bugs and errors
+### Common bugs and errors
 
 - If you get an error message saying something expected XXXX bytes but got XXXX bytes instead during pre-loading, the data conversion likely got interrupted somewhere (maybe due to OOM) -> temporary fix is to remove that image and the corresponding label from the `image` and `label` directories.
 - The default for `num_workers` is 16, but I recommend setting it to 1, otherwise you may also get warnings and the process may kill itself when loading in the data. This update should be pushed to the branch already.
 - For an interactive GPU session, I recommend adding this to your `~/.bashrc` on the cluster: `alias gpusession="salloc -p gpu_requeue --mem 99G -t 12:00:00 --gres=gpu:nvidia_a100-sxm4-80gb:1"`
 
-### Cluster Notes
+## Code Modifications from Branch
+The bulk of the code modifications occur in the "models/networks/unet_CT_multi_att_dsv_3D.py" file. This file holds the architecture of the underlying network. The modified `forward` function now allows the model to mask confident pixels, exclude them from further computation, and then plug them back in at the end. 
 
-To view which node a job ran on:
-
-`sacct -j <job_id> --format=JobID,JobName,Partition,State,NodeList`
-
-List of faulty nodes:
-
-- holygpu8a31305
-- holygpu8a31402
-- holygpu8a31202
-- holygpu8a25104
-- holygpu8a29106
-- holygpu8a25204
-
-Exclude faulty nodes after `srun` or `sbatch` with `--exclude=holygpu8a31305,holygpu8a31402,holygpu8a31202,holygpu8a29106,holygpu8a25104,holygpu8a25204`
-
-Well-behaved nodes:
-
-- holygpu8a29104
-- holygpu8a22602
+## Timing
+We timed the code by taking the mean computation time of the forward pass computations for each sample in the test set over 100 repetitions. This is intended to compare the time of the forward pass of the network; hence, we avoid timing the overhead of loading in training images as this would just introduce more variance and is not different for the baseline and early exit models. 
