@@ -46,7 +46,7 @@ def test_baseline_model(pretrained_model_path):
     # Set the model to evaluation mode
     model.net.eval()
     
-    model.set_thresholds("thresholds.pt")
+    # model.set_thresholds("thresholds.pt")
 
     # Initialize the error logger
     error_logger = ErrorLogger()

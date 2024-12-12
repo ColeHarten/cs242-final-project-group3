@@ -5,6 +5,7 @@ import torch.nn.functional as F
 from models.networks_other import init_weights
 from models.layers.grid_attention_layer import GridAttentionBlock3D
 
+from datetime import datetime as t
 
 class unet_CT_multi_att_dsv_3D(nn.Module):
 
@@ -82,7 +83,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         else:
             print(f"Threshold values loaded: {self.thresholds}")
             print(f"Using thresholds in forward pass ...")
-
+        
+        t1 = t.now()
+        
         # Encoder
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
@@ -109,14 +112,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         g_conv2, att2 = self.attentionblock2(conv2, up3)
         up2 = self.up_concat2(g_conv2, up3)
 
-        # Compute logits for each layer
-        # logits_up_concat4 = self.early_exit_up4(up4)
-        # logits_up_concat3 = self.early_exit_up3(up3)
-        # logits_up_concat2 = self.early_exit_up2(up2)
-        # self.layer_outputs['up_concat4'] = logits_up_concat4
-        # self.layer_outputs['up_concat3'] = logits_up_concat3
-        # self.layer_outputs['up_concat2'] = logits_up_concat2
-
+        
+        delta1 = (t.now() - t1).total_seconds()
+        
         # Early exit logic for multiple layers
         for layer_name, feature_map, early_exit_layer in zip(
             ["up_concat2"],
@@ -133,7 +131,9 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
             
             print(f"{pixel_mask.sum().item()}/{pixel_mask.numel()} pixels masked as confident.")
             print(f"Continuing with {(~pixel_mask).sum().item()} unconfident pixels at {layer_name}.")
-            
+        
+        t2 = t.now()
+        
         up1 = self.up_concat1(conv1, unconfident_features)
         
         target_size = up1.shape[-3:]
@@ -151,9 +151,10 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
         
         final = self.final(torch.cat([dsv1, dsv2, dsv3, dsv4], dim=1))
 
-        return final
+        return final, delta1 + (t.now() - t2).total_seconds()
     
     def regular_forward(self, inputs):
+        t1 = t.now()
         # Encoder
         conv1 = self.conv1(inputs)
         maxpool1 = self.maxpool1(conv1)
@@ -201,7 +202,7 @@ class unet_CT_multi_att_dsv_3D(nn.Module):
 
         final = self.final(torch.cat([dsv1, dsv2, dsv3, dsv4], dim=1))
         
-        return final
+        return final, (t.now() - t1).total_seconds()
     
     import torch.nn.functional as F
 
